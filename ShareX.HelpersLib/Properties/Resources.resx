@@ -297,9 +297,6 @@
   <data name="HotkeyType_ScreenRecorderGIFActiveWindow" xml:space="preserve">
     <value>Start/Stop screen recording (GIF) using active window region</value>
   </data>
-  <data name="HotkeyType_PrintScreen" xml:space="preserve">
-    <value>Capture entire screen</value>
-  </data>
   <data name="ImageEditorStartMode_Normal" xml:space="preserve">
     <value>Normal</value>
   </data>

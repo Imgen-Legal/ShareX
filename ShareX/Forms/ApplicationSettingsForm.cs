@@ -77,10 +77,6 @@ namespace ShareX
                 cmsLanguages.Items.Add(tsmi);
             }
 
-            cbTrayLeftDoubleClickAction.Items.AddRange(Helpers.GetLocalizedEnumDescriptions<HotkeyType>());
-            cbTrayLeftClickAction.Items.AddRange(Helpers.GetLocalizedEnumDescriptions<HotkeyType>());
-            cbTrayMiddleClickAction.Items.AddRange(Helpers.GetLocalizedEnumDescriptions<HotkeyType>());
-            cbUpdateChannel.Items.AddRange(Helpers.GetLocalizedEnumDescriptions<UpdateChannel>());
             cbMainWindowTaskViewMode.Items.AddRange(Helpers.GetLocalizedEnumDescriptions<TaskViewMode>());
             cbThumbnailViewTitleLocation.Items.AddRange(Helpers.GetLocalizedEnumDescriptions<ThumbnailTitleLocation>());
             cbThumbnailViewThumbnailClickAction.Items.AddRange(Helpers.GetLocalizedEnumDescriptions<ThumbnailViewClickAction>());
@@ -91,8 +87,6 @@ namespace ShareX
 
             CodeMenu.Create<CodeMenuEntryFilename>(txtSaveImageSubFolderPattern, CodeMenuEntryFilename.t, CodeMenuEntryFilename.pn, CodeMenuEntryFilename.i, CodeMenuEntryFilename.width, CodeMenuEntryFilename.height, CodeMenuEntryFilename.n);
             CodeMenu.Create<CodeMenuEntryFilename>(txtSaveImageSubFolderPatternWindow, CodeMenuEntryFilename.i, CodeMenuEntryFilename.n);
-
-            cbProxyMethod.Items.AddRange(Helpers.GetLocalizedEnumDescriptions<ProxyMethod>());
 
             UpdateControls();
         }
@@ -114,9 +108,6 @@ namespace ShareX
             cbRememberMainFormPosition.Checked = Program.Settings.RememberMainFormPosition;
             cbRememberMainFormSize.Checked = Program.Settings.RememberMainFormSize;
 
-            cbTrayLeftDoubleClickAction.SelectedIndex = (int)Program.Settings.TrayLeftDoubleClickAction;
-            cbTrayLeftClickAction.SelectedIndex = (int)Program.Settings.TrayLeftClickAction;
-            cbTrayMiddleClickAction.SelectedIndex = (int)Program.Settings.TrayMiddleClickAction;
 
 #if STEAM || MicrosoftStore
             cbAutoCheckUpdate.Visible = false;
@@ -124,19 +115,7 @@ namespace ShareX
             cbUpdateChannel.Visible = false;
             btnCheckDevBuild.Visible = false;
 #else
-            if (SystemOptions.DisableUpdateCheck)
-            {
-                cbAutoCheckUpdate.Visible = false;
-                lblUpdateChannel.Visible = false;
-                cbUpdateChannel.Visible = false;
-                btnCheckDevBuild.Visible = false;
-            }
-            else
-            {
-                cbAutoCheckUpdate.Checked = Program.Settings.AutoCheckUpdate;
-                cbUpdateChannel.Enabled = Program.Settings.AutoCheckUpdate;
-                cbUpdateChannel.SelectedIndex = (int)Program.Settings.UpdateChannel;
-            }
+
 #endif
 
             // Theme
@@ -177,10 +156,6 @@ namespace ShareX
             txtSaveImageSubFolderPattern.Text = Program.Settings.SaveImageSubFolderPattern;
             txtSaveImageSubFolderPatternWindow.Text = Program.Settings.SaveImageSubFolderPatternWindow;
 
-            // Settings
-            cbAutomaticallyCleanupBackupFiles.Checked = Program.Settings.AutoCleanupBackupFiles;
-            cbAutomaticallyCleanupLogFiles.Checked = Program.Settings.AutoCleanupLogFiles;
-            nudCleanupKeepFileCount.SetValue(Program.Settings.CleanupKeepFileCount);
 
             // Main window
             cbMainWindowShowMenu.Checked = Program.Settings.ShowMenu;
@@ -195,26 +170,18 @@ namespace ShareX
             cbListViewImagePreviewLocation.SelectedIndex = (int)Program.Settings.ImagePreviewLocation;
 
             // Clipboard formats
-            lvClipboardFormats.Items.Clear();
             foreach (ClipboardFormat cf in Program.Settings.ClipboardContentFormats)
             {
                 AddClipboardFormat(cf);
             }
 
-            // Upload
-            nudUploadLimit.SetValue(Program.Settings.UploadLimit);
 
-            cbBufferSize.Items.Clear();
             int maxBufferSizePower = 14;
             for (int i = 0; i < maxBufferSizePower; i++)
             {
                 string size = ((long)(Math.Pow(2, i) * 1024)).ToSizeString(Program.Settings.BinaryUnits, 0);
-                cbBufferSize.Items.Add(size);
-            }
-            cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Clamp(0, maxBufferSizePower);
 
-            nudRetryUpload.SetValue(Program.Settings.MaxUploadFailRetry);
-            cbUseSecondaryUploaders.Checked = Program.Settings.UseSecondaryUploaders;
+            }
 
             Program.Settings.SecondaryImageUploaders.AddRange(Helpers.GetEnums<ImageDestination>().Where(n => Program.Settings.SecondaryImageUploaders.All(e => e != n)));
             Program.Settings.SecondaryTextUploaders.AddRange(Helpers.GetEnums<TextDestination>().Where(n => Program.Settings.SecondaryTextUploaders.All(e => e != n)));
@@ -223,40 +190,6 @@ namespace ShareX
             Program.Settings.SecondaryImageUploaders.Where(n => Helpers.GetEnums<ImageDestination>().All(e => e != n)).ForEach(x => Program.Settings.SecondaryImageUploaders.Remove(x));
             Program.Settings.SecondaryTextUploaders.Where(n => Helpers.GetEnums<TextDestination>().All(e => e != n)).ForEach(x => Program.Settings.SecondaryTextUploaders.Remove(x));
             Program.Settings.SecondaryFileUploaders.Where(n => Helpers.GetEnums<FileDestination>().All(e => e != n)).ForEach(x => Program.Settings.SecondaryFileUploaders.Remove(x));
-
-            lvSecondaryImageUploaders.Items.Clear();
-            Program.Settings.SecondaryImageUploaders.ForEach<ImageDestination>(x => lvSecondaryImageUploaders.Items.Add(new ListViewItem(x.GetLocalizedDescription()) { Tag = x }));
-            lvSecondaryTextUploaders.Items.Clear();
-            Program.Settings.SecondaryTextUploaders.ForEach<TextDestination>(x => lvSecondaryTextUploaders.Items.Add(new ListViewItem(x.GetLocalizedDescription()) { Tag = x }));
-            lvSecondaryFileUploaders.Items.Clear();
-            Program.Settings.SecondaryFileUploaders.ForEach<FileDestination>(x => lvSecondaryFileUploaders.Items.Add(new ListViewItem(x.GetLocalizedDescription()) { Tag = x }));
-
-            // History
-            cbHistorySaveTasks.Checked = Program.Settings.HistorySaveTasks;
-            cbHistoryCheckURL.Checked = Program.Settings.HistoryCheckURL;
-
-            cbRecentTasksSave.Checked = Program.Settings.RecentTasksSave;
-            nudRecentTasksMaxCount.SetValue(Program.Settings.RecentTasksMaxCount);
-            cbRecentTasksShowInMainWindow.Checked = Program.Settings.RecentTasksShowInMainWindow;
-            cbRecentTasksShowInTrayMenu.Checked = Program.Settings.RecentTasksShowInTrayMenu;
-            cbRecentTasksTrayMenuMostRecentFirst.Checked = Program.Settings.RecentTasksTrayMenuMostRecentFirst;
-
-            // Print
-            cbDontShowPrintSettingDialog.Checked = Program.Settings.DontShowPrintSettingsDialog;
-            cbPrintDontShowWindowsDialog.Checked = !Program.Settings.PrintSettings.ShowPrintDialog;
-            txtDefaultPrinterOverride.Text = Program.Settings.PrintSettings.DefaultPrinterOverride;
-            lblDefaultPrinterOverride.Visible = txtDefaultPrinterOverride.Visible = !Program.Settings.PrintSettings.ShowPrintDialog;
-
-            // Proxy
-            cbProxyMethod.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyMethod;
-            txtProxyUsername.Text = Program.Settings.ProxySettings.Username;
-            txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
-            txtProxyHost.Text = Program.Settings.ProxySettings.Host ?? "";
-            nudProxyPort.SetValue(Program.Settings.ProxySettings.Port);
-            UpdateProxyControls();
-
-            // Advanced
-            pgSettings.SelectedObject = Program.Settings;
 
             tttvMain.MainTabControl = tcSettings;
 
@@ -317,24 +250,6 @@ namespace ShareX
 
             ready = true;
         }
-
-        private void UpdateProxyControls()
-        {
-            switch (Program.Settings.ProxySettings.ProxyMethod)
-            {
-                case ProxyMethod.None:
-                    txtProxyUsername.Enabled = txtProxyPassword.Enabled = txtProxyHost.Enabled = nudProxyPort.Enabled = false;
-                    break;
-                case ProxyMethod.Manual:
-                    txtProxyUsername.Enabled = txtProxyPassword.Enabled = txtProxyHost.Enabled = nudProxyPort.Enabled = true;
-                    break;
-                case ProxyMethod.Automatic:
-                    txtProxyUsername.Enabled = txtProxyPassword.Enabled = true;
-                    txtProxyHost.Enabled = nudProxyPort.Enabled = false;
-                    break;
-            }
-        }
-
         private void UpdatePersonalFolderPathPreview()
         {
             try
@@ -428,47 +343,9 @@ namespace ShareX
             Program.Settings.RememberMainFormSize = cbRememberMainFormSize.Checked;
         }
 
-        private void cbTrayLeftDoubleClickAction_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Program.Settings.TrayLeftDoubleClickAction = (HotkeyType)cbTrayLeftDoubleClickAction.SelectedIndex;
-        }
-
-        private void cbTrayLeftClickAction_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Program.Settings.TrayLeftClickAction = (HotkeyType)cbTrayLeftClickAction.SelectedIndex;
-        }
-
-        private void cbTrayMiddleClickAction_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Program.Settings.TrayMiddleClickAction = (HotkeyType)cbTrayMiddleClickAction.SelectedIndex;
-        }
-
         private void btnEditQuickTaskMenu_Click(object sender, EventArgs e)
         {
             new QuickTaskMenuEditorForm().ShowDialog();
-        }
-
-        private void cbAutoCheckUpdate_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.AutoCheckUpdate = cbAutoCheckUpdate.Checked;
-            cbUpdateChannel.Enabled = Program.Settings.AutoCheckUpdate;
-        }
-
-        private void cbUpdateChannel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Program.Settings.UpdateChannel = (UpdateChannel)cbUpdateChannel.SelectedIndex;
-        }
-
-        private async void btnCheckDevBuild_Click(object sender, EventArgs e)
-        {
-            btnCheckDevBuild.Enabled = false;
-
-            await TaskHelpers.DownloadDevBuild();
-
-            if (!IsDisposed)
-            {
-                btnCheckDevBuild.Enabled = true;
-            }
         }
 
         #endregion General
@@ -731,59 +608,6 @@ namespace ShareX
 
         #region Settings
 
-        private void cbExportSettings_CheckedChanged(object sender, EventArgs e)
-        {
-            btnExport.Enabled = cbExportSettings.Checked || cbExportHistory.Checked;
-        }
-
-        private void cbExportHistory_CheckedChanged(object sender, EventArgs e)
-        {
-            btnExport.Enabled = cbExportSettings.Checked || cbExportHistory.Checked;
-        }
-
-        private async void btnExport_Click(object sender, EventArgs e)
-        {
-            bool exportSettings = cbExportSettings.Checked;
-            bool exportHistory = cbExportHistory.Checked;
-
-            if (exportSettings || exportHistory)
-            {
-                using (SaveFileDialog sfd = new SaveFileDialog())
-                {
-                    sfd.DefaultExt = "sxb";
-                    sfd.FileName = $"ShareX-{Helpers.GetApplicationVersion()}-backup.sxb";
-                    sfd.Filter = "ShareX backup (*.sxb)|*.sxb|All files (*.*)|*.*";
-
-                    if (sfd.ShowDialog() == DialogResult.OK)
-                    {
-                        btnExport.Enabled = false;
-                        btnImport.Enabled = false;
-                        pbExportImport.Location = btnExport.Location;
-                        pbExportImport.Visible = true;
-
-                        string exportPath = sfd.FileName;
-
-                        DebugHelper.WriteLine($"Export started: {exportPath}");
-
-                        await Task.Run(() =>
-                        {
-                            SettingManager.SaveAllSettings();
-                            SettingManager.Export(exportPath, exportSettings, exportHistory);
-                        });
-
-                        if (!IsDisposed)
-                        {
-                            pbExportImport.Visible = false;
-                            btnExport.Enabled = true;
-                            btnImport.Enabled = true;
-                        }
-
-                        DebugHelper.WriteLine($"Export completed: {exportPath}");
-                    }
-                }
-            }
-        }
-
         private async void btnImport_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
@@ -792,10 +616,6 @@ namespace ShareX
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    btnExport.Enabled = false;
-                    btnImport.Enabled = false;
-                    pbExportImport.Location = btnImport.Location;
-                    pbExportImport.Visible = true;
 
                     string importPath = ofd.FileName;
 
@@ -810,10 +630,6 @@ namespace ShareX
                     if (!IsDisposed)
                     {
                         UpdateControls();
-
-                        pbExportImport.Visible = false;
-                        btnExport.Enabled = true;
-                        btnImport.Enabled = true;
                     }
 
                     LanguageHelper.ChangeLanguage(Program.Settings.Language);
@@ -841,21 +657,6 @@ namespace ShareX
 
                 DebugHelper.WriteLine("Settings reset.");
             }
-        }
-
-        private void cbAutomaticallyCleanupBackupFiles_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.AutoCleanupBackupFiles = cbAutomaticallyCleanupBackupFiles.Checked;
-        }
-
-        private void cbAutomaticallyCleanupLogFiles_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.AutoCleanupLogFiles = cbAutomaticallyCleanupLogFiles.Checked;
-        }
-
-        private void nudCleanupKeepFileCount_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CleanupKeepFileCount = (int)nudCleanupKeepFileCount.Value;
         }
 
         #endregion Settings
@@ -927,33 +728,6 @@ namespace ShareX
             ListViewItem lvi = new ListViewItem(cf.Description ?? "");
             lvi.Tag = cf;
             lvi.SubItems.Add(cf.Format ?? "");
-            lvClipboardFormats.Items.Add(lvi);
-        }
-
-        private void ClipboardFormatsEditSelected()
-        {
-            if (lvClipboardFormats.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lvClipboardFormats.SelectedItems[0];
-                ClipboardFormat cf = lvi.Tag as ClipboardFormat;
-                using (ClipboardFormatForm form = new ClipboardFormatForm(cf))
-                {
-                    if (form.ShowDialog() == DialogResult.OK)
-                    {
-                        lvi.Text = form.ClipboardFormat.Description ?? "";
-                        lvi.Tag = form.ClipboardFormat;
-                        lvi.SubItems[1].Text = form.ClipboardFormat.Format ?? "";
-                    }
-                }
-            }
-        }
-
-        private void lvClipboardFormats_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ClipboardFormatsEditSelected();
-            }
         }
 
         private void btnAddClipboardFormat_Click(object sender, EventArgs e)
@@ -969,100 +743,17 @@ namespace ShareX
             }
         }
 
-        private void btnClipboardFormatEdit_Click(object sender, EventArgs e)
-        {
-            ClipboardFormatsEditSelected();
-        }
-
-        private void btnClipboardFormatRemove_Click(object sender, EventArgs e)
-        {
-            if (lvClipboardFormats.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lvClipboardFormats.SelectedItems[0];
-                ClipboardFormat cf = lvi.Tag as ClipboardFormat;
-                Program.Settings.ClipboardContentFormats.Remove(cf);
-                lvClipboardFormats.Items.Remove(lvi);
-            }
-        }
-
         #endregion
 
         #region Upload
-
-        private void nudUploadLimit_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.UploadLimit = (int)nudUploadLimit.Value;
-        }
-
-        private void cbBufferSize_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Program.Settings.BufferSizePower = cbBufferSize.SelectedIndex;
-        }
-
-        private void nudRetryUpload_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.MaxUploadFailRetry = (int)nudRetryUpload.Value;
-        }
-
-        private void cbUseSecondaryUploaders_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.UseSecondaryUploaders = cbUseSecondaryUploaders.Checked;
-        }
-
-        private void lvSecondaryUploaders_MouseUp(object sender, MouseEventArgs e)
-        {
-            Program.Settings.SecondaryImageUploaders = lvSecondaryImageUploaders.Items.Cast<ListViewItem>().Select(x => (ImageDestination)x.Tag).ToList();
-            Program.Settings.SecondaryTextUploaders = lvSecondaryTextUploaders.Items.Cast<ListViewItem>().Select(x => (TextDestination)x.Tag).ToList();
-            Program.Settings.SecondaryFileUploaders = lvSecondaryFileUploaders.Items.Cast<ListViewItem>().Select(x => (FileDestination)x.Tag).ToList();
-        }
 
         #endregion Upload
 
         #region History
 
-        private void cbHistorySaveTasks_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.HistorySaveTasks = cbHistorySaveTasks.Checked;
-        }
-
-        private void cbHistoryCheckURL_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.HistoryCheckURL = cbHistoryCheckURL.Checked;
-        }
-
-        private void cbRecentTasksSave_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.RecentTasksSave = cbRecentTasksSave.Checked;
-        }
-
-        private void nudRecentTasksMaxCount_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.RecentTasksMaxCount = (int)nudRecentTasksMaxCount.Value;
-        }
-
-        private void cbRecentTasksShowInMainWindow_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.RecentTasksShowInMainWindow = cbRecentTasksShowInMainWindow.Checked;
-        }
-
-        private void cbRecentTasksShowInTrayMenu_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.RecentTasksShowInTrayMenu = cbRecentTasksShowInTrayMenu.Checked;
-        }
-
-        private void cbRecentTasksTrayMenuMostRecentFirst_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.RecentTasksTrayMenuMostRecentFirst = cbRecentTasksTrayMenuMostRecentFirst.Checked;
-        }
-
         #endregion History
 
         #region Print
-
-        private void cbDontShowPrintSettingDialog_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.DontShowPrintSettingsDialog = cbDontShowPrintSettingDialog.Checked;
-        }
 
         private void btnShowImagePrintSettings_Click(object sender, EventArgs e)
         {
@@ -1073,16 +764,6 @@ namespace ShareX
             }
         }
 
-        private void cbPrintDontShowWindowsDialog_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.PrintSettings.ShowPrintDialog = !cbPrintDontShowWindowsDialog.Checked;
-            lblDefaultPrinterOverride.Visible = txtDefaultPrinterOverride.Visible = !Program.Settings.PrintSettings.ShowPrintDialog;
-        }
-
-        private void txtDefaultPrinterOverride_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.PrintSettings.DefaultPrinterOverride = txtDefaultPrinterOverride.Text;
-        }
 
         #endregion Print
 
@@ -1090,36 +771,11 @@ namespace ShareX
 
         private void cbProxyMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Program.Settings.ProxySettings.ProxyMethod = (ProxyMethod)cbProxyMethod.SelectedIndex;
 
             if (Program.Settings.ProxySettings.ProxyMethod == ProxyMethod.Automatic)
             {
                 Program.Settings.ProxySettings.IsValidProxy();
-                txtProxyHost.Text = Program.Settings.ProxySettings.Host ?? "";
-                nudProxyPort.SetValue(Program.Settings.ProxySettings.Port);
             }
-
-            UpdateProxyControls();
-        }
-
-        private void txtProxyUsername_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ProxySettings.Username = txtProxyUsername.Text;
-        }
-
-        private void txtProxyPassword_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ProxySettings.Password = txtProxyPassword.Text;
-        }
-
-        private void txtProxyHost_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ProxySettings.Host = txtProxyHost.Text;
-        }
-
-        private void nudProxyPort_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ProxySettings.Port = (int)nudProxyPort.Value;
         }
 
         #endregion Proxy

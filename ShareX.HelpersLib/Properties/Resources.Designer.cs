@@ -1649,15 +1649,6 @@ namespace ShareX.HelpersLib.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Capture entire screen.
-        /// </summary>
-        internal static string HotkeyType_PrintScreen {
-            get {
-                return ResourceManager.GetString("HotkeyType_PrintScreen", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to QR code.
         /// </summary>
         internal static string HotkeyType_QRCode {

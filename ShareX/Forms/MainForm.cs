@@ -96,18 +96,13 @@ namespace ShareX
 
             AfterCaptureTasks[] ignoreAfterCaptureTasks = null;
 
-            if (SystemOptions.DisableUpload)
-            {
-                ignoreAfterCaptureTasks = new AfterCaptureTasks[] { AfterCaptureTasks.ShowBeforeUploadWindow, AfterCaptureTasks.UploadImageToHost };
-            }
-
             AddMultiEnumItems<AfterCaptureTasks>(x => Program.DefaultTaskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Swap(x),
                 new ToolStripDropDownItem[] { tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks }, ignoreAfterCaptureTasks);
             tsddbAfterCaptureTasks.DropDownOpening += TsddbAfterCaptureTasks_DropDownOpening;
             tsmiTrayAfterCaptureTasks.DropDownOpening += TsmiTrayAfterCaptureTasks_DropDownOpening;
 
             AddMultiEnumItems<AfterUploadTasks>(x => Program.DefaultTaskSettings.AfterUploadJob = Program.DefaultTaskSettings.AfterUploadJob.Swap(x),
-                new ToolStripDropDownItem[] { tsddbAfterUploadTasks, tsmiTrayAfterUploadTasks });
+                new ToolStripDropDownItem[] { tsmiTrayAfterUploadTasks });
 
             AddEnumItems<ImageDestination>(x =>
             {
@@ -191,9 +186,9 @@ namespace ShareX
 
             foreach (ToolStripDropDownItem dropDownItem in new ToolStripDropDownItem[]
             {
-                tsddbAfterCaptureTasks, tsddbAfterUploadTasks, tsmiImageUploaders, tsmiImageFileUploaders, tsmiTextUploaders, tsmiTextFileUploaders, tsmiFileUploaders,
+                tsddbAfterCaptureTasks, tsmiImageUploaders, tsmiImageFileUploaders, tsmiTextUploaders, tsmiTextFileUploaders, tsmiFileUploaders,
                 tsmiURLShorteners, tsmiURLSharingServices, tsmiTrayAfterCaptureTasks, tsmiTrayAfterUploadTasks, tsmiTrayImageUploaders, tsmiTrayImageFileUploaders,
-                tsmiTrayTextUploaders, tsmiTrayTextFileUploaders, tsmiTrayFileUploaders, tsmiTrayURLShorteners, tsmiTrayURLSharingServices, tsmiScreenshotDelay,
+                tsmiTrayTextUploaders, tsmiTrayTextFileUploaders, tsmiTrayFileUploaders, tsmiTrayURLShorteners, tsmiTrayURLSharingServices,
                 tsmiTrayScreenshotDelay
             })
             {
@@ -204,14 +199,7 @@ namespace ShareX
 
             if (SystemOptions.DisableUpload)
             {
-                tsddbUpload.Visible = false;
-                tsddbAfterUploadTasks.Visible = false;
                 tsddbDestinations.Visible = false;
-                tsmiTestImageUpload.Visible = false;
-                tsmiTestTextUpload.Visible = false;
-                tsmiTestFileUpload.Visible = false;
-                tsmiTestURLShortener.Visible = false;
-                tsmiTestURLSharing.Visible = false;
 
                 tsmiTrayUpload.Visible = false;
                 tsmiTrayAfterUploadTasks.Visible = false;
@@ -836,13 +824,8 @@ namespace ShareX
             ShareXResources.ApplyCustomThemeToControl(dgvHotkeys);
             dgvHotkeys.BackgroundColor = ShareXResources.Theme.BackgroundColor;
 
-            tsmiTweetMessage.Image = TaskHelpers.FindMenuIcon(HotkeyType.TweetMessage);
             tsmiTrayTweetMessage.Image = TaskHelpers.FindMenuIcon(HotkeyType.TweetMessage);
-            tsbX.Image = TaskHelpers.FindMenuIcon(HotkeyType.TweetMessage);
 
-            tsbDiscord.Image = ShareXResources.IsDarkTheme ? Resources.Discord_white : Resources.Discord_black;
-
-            tsmiQRCode.Image = TaskHelpers.FindMenuIcon(HotkeyType.QRCode);
             tsmiTrayQRCode.Image = TaskHelpers.FindMenuIcon(HotkeyType.QRCode);
             tsmiShowQRCode.Image = TaskHelpers.FindMenuIcon(HotkeyType.QRCode);
 
@@ -850,11 +833,9 @@ namespace ShareX
             tsmiTrayOCR.Image = TaskHelpers.FindMenuIcon(HotkeyType.OCR);
             tsmiOCRImage.Image = TaskHelpers.FindMenuIcon(HotkeyType.OCR);
 
-            tsmiShortenURL.Image = TaskHelpers.FindMenuIcon(HotkeyType.ShortenURL);
             tsmiTrayShortenURL.Image = TaskHelpers.FindMenuIcon(HotkeyType.ShortenURL);
             tsmiURLShorteners.Image = TaskHelpers.FindMenuIcon(HotkeyType.ShortenURL);
             tsmiTrayURLShorteners.Image = TaskHelpers.FindMenuIcon(HotkeyType.ShortenURL);
-            tsmiTestURLShortener.Image = TaskHelpers.FindMenuIcon(HotkeyType.ShortenURL);
             tsmiShortenSelectedURL.Image = TaskHelpers.FindMenuIcon(HotkeyType.ShortenURL);
 
             pbPreview.UpdateTheme();
@@ -975,7 +956,7 @@ namespace ShareX
         public void UpdateCheckStates()
         {
             SetMultiEnumChecked(Program.DefaultTaskSettings.AfterCaptureJob, tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
-            SetMultiEnumChecked(Program.DefaultTaskSettings.AfterUploadJob, tsddbAfterUploadTasks, tsmiTrayAfterUploadTasks);
+            SetMultiEnumChecked(Program.DefaultTaskSettings.AfterUploadJob, tsmiTrayAfterUploadTasks);
             SetEnumChecked(Program.DefaultTaskSettings.ImageDestination, tsmiImageUploaders, tsmiTrayImageUploaders);
             SetImageFileDestinationChecked(Program.DefaultTaskSettings.ImageDestination, Program.DefaultTaskSettings.ImageFileDestination, tsmiImageFileUploaders, tsmiTrayImageFileUploaders);
             SetEnumChecked(Program.DefaultTaskSettings.TextDestination, tsmiTextUploaders, tsmiTrayTextUploaders);
@@ -1133,37 +1114,27 @@ namespace ShareX
             switch (delay)
             {
                 default:
-                    tsmiScreenshotDelay.UpdateCheckedAll(false);
                     tsmiTrayScreenshotDelay.UpdateCheckedAll(false);
                     break;
                 case 0:
-                    tsmiScreenshotDelay0.RadioCheck();
                     tsmiTrayScreenshotDelay0.RadioCheck();
                     break;
                 case 1:
-                    tsmiScreenshotDelay1.RadioCheck();
                     tsmiTrayScreenshotDelay1.RadioCheck();
                     break;
                 case 2:
-                    tsmiScreenshotDelay2.RadioCheck();
                     tsmiTrayScreenshotDelay2.RadioCheck();
                     break;
                 case 3:
-                    tsmiScreenshotDelay3.RadioCheck();
                     tsmiTrayScreenshotDelay3.RadioCheck();
                     break;
                 case 4:
-                    tsmiScreenshotDelay4.RadioCheck();
                     tsmiTrayScreenshotDelay4.RadioCheck();
                     break;
                 case 5:
-                    tsmiScreenshotDelay5.RadioCheck();
                     tsmiTrayScreenshotDelay5.RadioCheck();
                     break;
             }
-
-            tsmiScreenshotDelay.Text = tsmiTrayScreenshotDelay.Text = string.Format(Resources.ScreenshotDelay0S, delay.ToString("0.#"));
-            tsmiScreenshotDelay.Checked = tsmiTrayScreenshotDelay.Checked = delay > 0;
         }
 
         private async Task PrepareCaptureMenuAsync(ToolStripMenuItem tsmiWindow, EventHandler handlerWindow, ToolStripMenuItem tsmiMonitor, EventHandler handlerMonitor)
