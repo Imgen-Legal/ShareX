@@ -1859,20 +1859,9 @@ namespace ShareX
                     case AfterCaptureTasks.AddImageEffects: return Resources.image_saturation;
                     case AfterCaptureTasks.AnnotateImage: return Resources.image_pencil;
                     case AfterCaptureTasks.CopyImageToClipboard: return Resources.clipboard_paste_image;
-                    case AfterCaptureTasks.PinToScreen: return Resources.pin;
-                    case AfterCaptureTasks.SendImageToPrinter: return Resources.printer;
                     case AfterCaptureTasks.SaveImageToFile: return Resources.disk;
                     case AfterCaptureTasks.SaveImageToFileWithDialog: return Resources.disk_rename;
-                    case AfterCaptureTasks.SaveThumbnailImageToFile: return Resources.disk_small;
-                    case AfterCaptureTasks.PerformActions: return Resources.application_terminal;
-                    case AfterCaptureTasks.CopyFileToClipboard: return Resources.clipboard_block;
-                    case AfterCaptureTasks.CopyFilePathToClipboard: return Resources.clipboard_list;
-                    case AfterCaptureTasks.ShowInExplorer: return Resources.folder_stand;
-                    case AfterCaptureTasks.ScanQRCode: return ShareXResources.IsDarkTheme ? Resources.barcode_2d_white : Resources.barcode_2d;
                     case AfterCaptureTasks.DoOCR: return ShareXResources.IsDarkTheme ? Resources.edit_drop_cap_white : Resources.edit_drop_cap;
-                    case AfterCaptureTasks.ShowBeforeUploadWindow: return Resources.application__arrow;
-                    case AfterCaptureTasks.UploadImageToHost: return Resources.upload_cloud;
-                    case AfterCaptureTasks.DeleteFile: return Resources.bin;
                 }
             }
             else if (value is AfterUploadTasks afterUploadTask)

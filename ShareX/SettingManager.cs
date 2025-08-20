@@ -191,11 +191,6 @@ namespace ShareX
 
         private static void ApplicationConfigBackwardCompatibilityTasks()
         {
-            if (SystemOptions.DisableUpload)
-            {
-                DefaultTaskSettings.AfterCaptureJob = DefaultTaskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.UploadImageToHost);
-            }
-
             if (Settings.IsUpgradeFrom("14.1.1"))
             {
                 if (Helpers.IsDefaultSettings(Settings.Themes, ShareXTheme.GetDefaultThemes(), (x, y) => x.Name == y.Name))
@@ -291,16 +286,6 @@ namespace ShareX
 
         private static void HotkeysConfigBackwardCompatibilityTasks()
         {
-            if (SystemOptions.DisableUpload)
-            {
-                foreach (TaskSettings taskSettings in HotkeysConfig.Hotkeys.Select(x => x.TaskSettings))
-                {
-                    if (taskSettings != null)
-                    {
-                        taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.UploadImageToHost);
-                    }
-                }
-            }
 
             if (Settings.IsUpgradeFrom("15.0.1"))
             {

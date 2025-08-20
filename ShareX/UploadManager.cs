@@ -148,11 +148,6 @@ namespace ShareX
         {
             if (bmp != null)
             {
-                if (!taskSettings.AdvancedSettings.ProcessImagesDuringClipboardUpload)
-                {
-                    taskSettings.AfterCaptureJob = AfterCaptureTasks.UploadImageToHost;
-                }
-
                 RunImageTask(bmp, taskSettings);
             }
         }
@@ -421,7 +416,6 @@ namespace ShareX
                 if (taskSettings.IsSafeTaskSettings)
                 {
                     taskSettings.UseDefaultAfterCaptureJob = false;
-                    taskSettings.AfterCaptureJob = AfterCaptureTasks.UploadImageToHost;
                 }
 
                 RunImageTask(bmp, taskSettings);
@@ -440,7 +434,6 @@ namespace ShareX
                 if (taskSettings.IsSafeTaskSettings)
                 {
                     taskSettings.UseDefaultAfterCaptureJob = false;
-                    taskSettings.AfterCaptureJob = AfterCaptureTasks.UploadImageToHost;
                     taskSettings.UseDefaultDestinations = false;
                     taskSettings.ImageDestination = imageDestination;
                     taskSettings.ImageFileDestination = imageFileDestination;

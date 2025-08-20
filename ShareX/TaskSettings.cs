@@ -53,7 +53,7 @@ namespace ShareX
         public HotkeyType Job = HotkeyType.None;
 
         public bool UseDefaultAfterCaptureJob = true;
-        public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.CopyImageToClipboard | AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
+        public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.CopyImageToClipboard | AfterCaptureTasks.SaveImageToFile;
 
         public bool UseDefaultAfterUploadJob = true;
         public AfterUploadTasks AfterUploadJob = AfterUploadTasks.CopyURLToClipboard;
@@ -393,7 +393,7 @@ namespace ShareX
 
         public FFmpegOptions FFmpegOptions = new FFmpegOptions();
         public int ScreenRecordFPS = 30;
-        public int GIFFPS = 15;
+        public int GIFFPS = 30;
         public bool ScreenRecordShowCursor = true;
         public bool ScreenRecordAutoStart = true;
         public float ScreenRecordStartDelay = 0f;
