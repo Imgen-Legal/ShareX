@@ -41,7 +41,61 @@ namespace ShareX
 {
     public partial class MainForm : HotkeyForm
     {
+        private const int MAX_BUTTON_TEXT_LENGTH = 22;
         public bool IsReady { get; private set; }
+        public DirectusCase CurrentCase { get; set; }
+        public List<DirectusPatient> CurrentPatients { get; set; }
+
+        public void UpdateCaseInfo()
+        {
+            if (this.toolStripCaseButton == null)
+            {
+                return;
+            }
+
+            if (CurrentCase != null && CurrentPatients != null && CurrentPatients.Count > 0)
+            {
+                var patient = CurrentPatients.First();
+
+                string caseName = CurrentCase.Name ?? CurrentCase.Id.ToString();
+                string patientFullName = $"{patient.FirstName} {patient.LastName}";
+
+                string fullInfo = $"Case: {caseName} - {patientFullName}";
+
+                this.toolStripCaseButton.ToolTipText = fullInfo;
+
+                string buttonText;
+                if (fullInfo.Length > MAX_BUTTON_TEXT_LENGTH)
+                {
+                    buttonText = fullInfo.Substring(0, MAX_BUTTON_TEXT_LENGTH) + "...";
+                }
+                else
+                {
+                    buttonText = fullInfo;
+                }
+
+                this.toolStripCaseButton.Text = buttonText;
+            }
+            else
+            {
+                this.toolStripCaseButton.Text = "Select Case...";
+                this.toolStripCaseButton.ToolTipText = "Click to select a case or patient.";
+            }
+        }
+
+        private void ToolStripCaseButton_Click(object sender, EventArgs e)
+        {
+            using (var caseForm = new CaseSelectionForm())
+            {
+                if (caseForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.CurrentCase = caseForm.SelectedCase;
+                    this.CurrentPatients = caseForm.SelectedPatients;
+
+                    this.UpdateCaseInfo();
+                }
+            }
+        }
 
         private bool forceClose, trayMenuSaveSettings = true;
         private int trayClickCount = 0;
@@ -66,6 +120,8 @@ namespace ShareX
         public MainForm()
         {
             InitializeControls();
+
+            this.toolStripCaseButton.Click += this.ToolStripCaseButton_Click;
         }
 
         public void UpdateUserEmailLabel()
@@ -117,7 +173,9 @@ namespace ShareX
             tsmiShareSelectedURL.HideImageMargin();
             tsmiTrayRecentItems.HideImageMargin();
 
-            AfterCaptureTasks[] ignoreAfterCaptureTasks = null;
+            AfterCaptureTasks[] ignoreAfterCaptureTasks = new AfterCaptureTasks[] { AfterCaptureTasks.None, AfterCaptureTasks.ShowQuickTaskMenu, AfterCaptureTasks.ShowAfterCaptureWindow, AfterCaptureTasks.PinToScreen,
+            AfterCaptureTasks.SendImageToPrinter, AfterCaptureTasks.SaveThumbnailImageToFile, AfterCaptureTasks.CopyFilePathToClipboard, AfterCaptureTasks.CopyFilePathToClipboard,
+            AfterCaptureTasks.ShowInExplorer , AfterCaptureTasks.ScanQRCode, AfterCaptureTasks.DoOCR, AfterCaptureTasks.ShowBeforeUploadWindow, AfterCaptureTasks.DeleteFile, AfterCaptureTasks.CopyFileToClipboard };
 
             AddMultiEnumItems<AfterCaptureTasks>(x => Program.DefaultTaskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Swap(x),
                 new ToolStripDropDownItem[] { tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks }, ignoreAfterCaptureTasks);

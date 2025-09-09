@@ -4,7 +4,7 @@
     {
         /// <summary>
         /// Required designer variable.
-        /// </summary>
+        /// </summary> 
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -84,6 +84,8 @@
             this.tsbApplicationSettings = new System.Windows.Forms.ToolStripButton();
             this.tsbTaskSettings = new System.Windows.Forms.ToolStripButton();
             this.tsbHotkeySettings = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripCaseButton = new System.Windows.Forms.ToolStripButton();
             this.tssMain3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbAbout = new System.Windows.Forms.ToolStripButton();
             this.cmsTaskInfo = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -362,11 +364,12 @@
             this.tsbApplicationSettings,
             this.tsbTaskSettings,
             this.tsbHotkeySettings,
+            this.toolStripSeparator1,
+            this.toolStripCaseButton,
             this.tssMain3,
             this.tsbAbout});
             this.tsMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.tsMain.Name = "tsMain";
-            this.tsMain.ShowItemToolTips = false;
             this.tsMain.TabStop = true;
             // 
             // tsddbCapture
@@ -660,6 +663,18 @@
             resources.ApplyResources(this.tsbHotkeySettings, "tsbHotkeySettings");
             this.tsbHotkeySettings.Name = "tsbHotkeySettings";
             this.tsbHotkeySettings.Click += new System.EventHandler(this.tsbHotkeySettings_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 6);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // toolStripCaseButton
+            // 
+            resources.ApplyResources(this.toolStripCaseButton, "toolStripCaseButton");
+            this.toolStripCaseButton.Image = global::ShareX.Properties.Resources.application_blog;
+            this.toolStripCaseButton.Name = "toolStripCaseButton";
             // 
             // tssMain3
             // 
@@ -2176,5 +2191,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCustomUploaderSettings;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Label lblUserEmail;
+        private System.Windows.Forms.ToolStripButton toolStripCaseButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

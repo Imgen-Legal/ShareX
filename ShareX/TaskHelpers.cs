@@ -1852,7 +1852,7 @@ namespace ShareX
             {
                 switch (afterCaptureTask)
                 {
-                    default: throw new Exception("Icon missing for after capture task: " + afterCaptureTask);
+                    //default: throw new Exception("Icon missing for after capture task: " + afterCaptureTask);
                     case AfterCaptureTasks.ShowQuickTaskMenu: return Resources.ui_menu_blue;
                     case AfterCaptureTasks.ShowAfterCaptureWindow: return Resources.application_text_image;
                     case AfterCaptureTasks.BeautifyImage: return Resources.picture_sunset;
