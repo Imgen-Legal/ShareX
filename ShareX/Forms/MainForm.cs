@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using ShareX.Forms;
 using ShareX.HelpersLib;
 using ShareX.ImageEffectsLib;
 using ShareX.Properties;
@@ -48,9 +49,31 @@ namespace ShareX
         private ToolStripDropDownItem tsmiImageFileUploaders, tsmiTrayImageFileUploaders, tsmiTextFileUploaders, tsmiTrayTextFileUploaders;
         private ImageFilesCache actionsMenuIconCache = new ImageFilesCache();
 
+        private string _userEmail;
+        public string UserEmail
+        {
+            get => _userEmail;
+            set
+            {
+                _userEmail = value;
+                if (lblUserEmail != null && !string.IsNullOrEmpty(_userEmail))
+                {
+                    lblUserEmail.Text = _userEmail;
+                }
+            }
+        }
+
         public MainForm()
         {
             InitializeControls();
+        }
+
+        public void UpdateUserEmailLabel()
+        {
+            if (!string.IsNullOrEmpty(this.UserEmail))
+            {
+                lblUserEmail.Text = this.UserEmail;
+            }
         }
 
         private async void MainForm_HandleCreated(object sender, EventArgs e)
@@ -2341,6 +2364,28 @@ namespace ShareX
         private void tsmiCombineImagesHorizontally_Click(object sender, EventArgs e)
         {
             uim.CombineImages(Orientation.Horizontal);
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            SessionManager.AccessToken = null;
+            SessionManager.RefreshToken = null;
+
+            TokenManager.DeleteTokens();
+
+            this.Hide();
+
+            using (LoginForm loginForm = new LoginForm())
+            {
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    this.Show();
+                }
+                else
+                {
+                    Application.Exit();
+                }
+            }
         }
 
         private void tsmiCombineImagesVertically_Click(object sender, EventArgs e)

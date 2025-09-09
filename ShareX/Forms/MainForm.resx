@@ -349,82 +349,82 @@
     <value>Workflows</value>
   </data>
   <data name="tsmiColorPicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>256, 34</value>
   </data>
   <data name="tsmiColorPicker.Text" xml:space="preserve">
     <value>Color picker...</value>
   </data>
   <data name="tsmiRuler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>256, 34</value>
   </data>
   <data name="tsmiRuler.Text" xml:space="preserve">
     <value>Ruler...</value>
   </data>
   <data name="tssTools1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 6</value>
+    <value>253, 6</value>
   </data>
   <data name="tsmiImageEditor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>256, 34</value>
   </data>
   <data name="tsmiImageEditor.Text" xml:space="preserve">
     <value>Image editor...</value>
   </data>
   <data name="tsmiImageBeautifier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>256, 34</value>
   </data>
   <data name="tsmiImageBeautifier.Text" xml:space="preserve">
     <value>Image beautifier...</value>
   </data>
   <data name="tsmiImageEffects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>256, 34</value>
   </data>
   <data name="tsmiImageEffects.Text" xml:space="preserve">
     <value>Image effects...</value>
   </data>
   <data name="tsmiImageViewer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>256, 34</value>
   </data>
   <data name="tsmiImageViewer.Text" xml:space="preserve">
     <value>Image viewer...</value>
   </data>
   <data name="tsmiImageCombiner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>256, 34</value>
   </data>
   <data name="tsmiImageCombiner.Text" xml:space="preserve">
     <value>Image combiner...</value>
   </data>
   <data name="tsmiImageSplitter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>256, 34</value>
   </data>
   <data name="tsmiImageSplitter.Text" xml:space="preserve">
     <value>Image splitter...</value>
   </data>
   <data name="tssTools2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 6</value>
+    <value>253, 6</value>
   </data>
   <data name="tsmiVideoConverter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>256, 34</value>
   </data>
   <data name="tsmiVideoConverter.Text" xml:space="preserve">
     <value>Video converter...</value>
   </data>
   <data name="tssTools3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 6</value>
+    <value>253, 6</value>
   </data>
   <data name="tsmiOCR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>256, 34</value>
   </data>
   <data name="tsmiOCR.Text" xml:space="preserve">
     <value>OCR...</value>
   </data>
   <data name="tsmiMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>256, 34</value>
   </data>
   <data name="tsmiMetadata.Text" xml:space="preserve">
     <value>Metadata...</value>
   </data>
   <data name="tssTools4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 6</value>
+    <value>253, 6</value>
   </data>
   <data name="tsddbTools.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -586,7 +586,7 @@
     <value>pToolbars</value>
   </data>
   <data name="&gt;&gt;tsMain.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <metadata name="cmsTaskInfo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>286, 17</value>
@@ -1506,6 +1506,78 @@
   <data name="pToolbars.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="btnLogout.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="btnLogout.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnLogout.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnLogout.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnLogout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 681</value>
+  </data>
+  <data name="btnLogout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 32</value>
+  </data>
+  <data name="btnLogout.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="btnLogout.Text" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="btnLogout.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;btnLogout.Name" xml:space="preserve">
+    <value>btnLogout</value>
+  </data>
+  <data name="&gt;&gt;btnLogout.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnLogout.Parent" xml:space="preserve">
+    <value>pToolbars</value>
+  </data>
+  <data name="&gt;&gt;btnLogout.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblUserEmail.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="lblUserEmail.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblUserEmail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblUserEmail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 658</value>
+  </data>
+  <data name="lblUserEmail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="lblUserEmail.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblUserEmail.Text" xml:space="preserve">
+    <value>email</value>
+  </data>
+  <data name="&gt;&gt;lblUserEmail.Name" xml:space="preserve">
+    <value>lblUserEmail</value>
+  </data>
+  <data name="&gt;&gt;lblUserEmail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblUserEmail.Parent" xml:space="preserve">
+    <value>pToolbars</value>
+  </data>
+  <data name="&gt;&gt;lblUserEmail.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="pToolbars.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -1700,9 +1772,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1266, 725</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
