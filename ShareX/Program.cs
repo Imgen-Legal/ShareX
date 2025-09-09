@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using ShareX.Forms;
 using ShareX.HelpersLib;
 using ShareX.Properties;
 using ShareX.UploadersLib;
@@ -333,11 +334,11 @@ namespace ShareX
 
             SilentRun = CLI.IsCommandExist("silent", "s");
 #if MicrosoftStore
-            SilentRun = SilentRun || AppInstance.GetActivatedEventArgs()?.Kind == ActivationKind.StartupTask;
+    SilentRun = SilentRun || AppInstance.GetActivatedEventArgs()?.Kind == ActivationKind.StartupTask;
 #endif
 
 #if STEAM
-            SteamFirstTimeConfig = CLI.IsCommandExist("SteamConfig");
+    SteamFirstTimeConfig = CLI.IsCommandExist("SteamConfig");
 #endif
 
             IgnoreHotkeyWarning = CLI.IsCommandExist("NoHotkeys");
@@ -355,11 +356,49 @@ namespace ShareX
             CleanupManager.CleanupAsync();
             Helpers.TryFixHandCursor();
 
-            DebugHelper.WriteLine("MainForm init started.");
-            MainForm = new MainForm();
-            DebugHelper.WriteLine("MainForm init finished.");
+            var (accessToken, refreshToken, email) = TokenManager.LoadTokens();
 
-            Application.Run(MainForm);
+
+            if (!string.IsNullOrEmpty(accessToken) && !string.IsNullOrEmpty(refreshToken))
+            {
+                SessionManager.AccessToken = accessToken;
+                SessionManager.RefreshToken = refreshToken;
+                SessionManager.UserEmail = email;
+
+                var (success, error) = SessionManager.RefreshSessionAsync().GetAwaiter().GetResult();
+
+                if (success)
+                {
+                    DebugHelper.WriteLine("MainForm init started.");
+                    MainForm = new MainForm();
+                    MainForm.UserEmail = SessionManager.UserEmail;
+                    MainForm.UpdateUserEmailLabel();
+                    DebugHelper.WriteLine("MainForm init finished.");
+                    Application.Run(MainForm);
+                    CloseSequence();
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show(error, "Login error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+
+            using (LoginForm loginForm = new LoginForm())
+            {
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    DebugHelper.WriteLine("MainForm init started.");
+                    MainForm = new MainForm();
+                    MainForm.UserEmail = SessionManager.UserEmail;
+                    DebugHelper.WriteLine("MainForm init finished.");
+                    Application.Run(MainForm);
+                }
+                else
+                {
+                    Application.Exit();
+                }
+            }
 
             CloseSequence();
         }

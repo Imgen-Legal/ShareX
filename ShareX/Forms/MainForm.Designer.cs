@@ -239,6 +239,8 @@
             this.timerTraySingleClick = new System.Windows.Forms.Timer(this.components);
             this.ttMain = new System.Windows.Forms.ToolTip(this.components);
             this.pToolbars = new System.Windows.Forms.Panel();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.lblUserEmail = new System.Windows.Forms.Label();
             this.dgvHotkeys = new System.Windows.Forms.DataGridView();
             this.cHotkeyStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cHotkey = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -572,7 +574,6 @@
             this.tsddbAfterCaptureTasks.Image = global::ShareX.Properties.Resources.image_export;
             resources.ApplyResources(this.tsddbAfterCaptureTasks, "tsddbAfterCaptureTasks");
             this.tsddbAfterCaptureTasks.Name = "tsddbAfterCaptureTasks";
-            this.tsddbAfterCaptureTasks.Click += new System.EventHandler(this.tsddbAfterCaptureTasks_Click);
             // 
             // tsddbDestinations
             // 
@@ -1809,8 +1810,27 @@
             // pToolbars
             // 
             resources.ApplyResources(this.pToolbars, "pToolbars");
+            this.pToolbars.Controls.Add(this.btnLogout);
+            this.pToolbars.Controls.Add(this.lblUserEmail);
             this.pToolbars.Controls.Add(this.tsMain);
             this.pToolbars.Name = "pToolbars";
+            // 
+            // btnLogout
+            // 
+            resources.ApplyResources(this.btnLogout, "btnLogout");
+            this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnLogout.Image = global::ShareX.Properties.Resources.logout__2_;
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // lblUserEmail
+            // 
+            resources.ApplyResources(this.lblUserEmail, "lblUserEmail");
+            this.lblUserEmail.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblUserEmail.Name = "lblUserEmail";
             // 
             // dgvHotkeys
             // 
@@ -2154,5 +2174,7 @@
         private System.Windows.Forms.ToolStripSeparator tssDestinations1;
         private System.Windows.Forms.ToolStripMenuItem tsmiDestinationSettings;
         private System.Windows.Forms.ToolStripMenuItem tsmiCustomUploaderSettings;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Label lblUserEmail;
     }
 }
