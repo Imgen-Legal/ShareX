@@ -220,7 +220,7 @@
     <value>6, 8, 6, 8</value>
   </data>
   <data name="pbPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>674, 725</value>
+    <value>654, 725</value>
   </data>
   <data name="pbPreview.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -250,7 +250,7 @@
     <value>1</value>
   </data>
   <data name="scMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1018, 725</value>
+    <value>998, 725</value>
   </data>
   <data name="scMain.SplitterDistance" type="System.Int32, mscorlib">
     <value>335</value>
@@ -331,7 +331,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsddbCapture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 29</value>
+    <value>249, 29</value>
   </data>
   <data name="tsddbCapture.Text" xml:space="preserve">
     <value>Capture</value>
@@ -343,7 +343,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsddbWorkflows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 29</value>
+    <value>249, 29</value>
   </data>
   <data name="tsddbWorkflows.Text" xml:space="preserve">
     <value>Workflows</value>
@@ -433,13 +433,13 @@
     <value>Magenta</value>
   </data>
   <data name="tsddbTools.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 29</value>
+    <value>249, 29</value>
   </data>
   <data name="tsddbTools.Text" xml:space="preserve">
     <value>Tools</value>
   </data>
   <data name="tssMain1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 6</value>
+    <value>249, 6</value>
   </data>
   <data name="tsddbAfterCaptureTasks.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -448,7 +448,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsddbAfterCaptureTasks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 29</value>
+    <value>249, 29</value>
   </data>
   <data name="tsddbAfterCaptureTasks.Text" xml:space="preserve">
     <value>After capture tasks</value>
@@ -505,10 +505,13 @@
     <value>Magenta</value>
   </data>
   <data name="tsddbDestinations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 29</value>
+    <value>249, 29</value>
   </data>
   <data name="tsddbDestinations.Text" xml:space="preserve">
     <value>Destinations</value>
+  </data>
+  <data name="tsddbDestinations.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsbApplicationSettings.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -517,7 +520,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbApplicationSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 29</value>
+    <value>249, 29</value>
   </data>
   <data name="tsbApplicationSettings.Text" xml:space="preserve">
     <value>Application settings...</value>
@@ -529,7 +532,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbTaskSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 29</value>
+    <value>249, 29</value>
   </data>
   <data name="tsbTaskSettings.Text" xml:space="preserve">
     <value>Task settings...</value>
@@ -541,13 +544,31 @@
     <value>Magenta</value>
   </data>
   <data name="tsbHotkeySettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 29</value>
+    <value>249, 29</value>
   </data>
   <data name="tsbHotkeySettings.Text" xml:space="preserve">
     <value>Hotkey settings...</value>
   </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 6</value>
+  </data>
+  <data name="toolStripCaseButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripCaseButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="toolStripCaseButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripCaseButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 32</value>
+  </data>
+  <data name="toolStripCaseButton.Text" xml:space="preserve">
+    <value>Case:</value>
+  </data>
   <data name="tssMain3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 6</value>
+    <value>249, 6</value>
   </data>
   <data name="tsbAbout.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -556,7 +577,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 29</value>
+    <value>249, 29</value>
   </data>
   <data name="tsbAbout.Text" xml:space="preserve">
     <value>About...</value>
@@ -571,7 +592,7 @@
     <value>9, 8, 9, 3</value>
   </data>
   <data name="tsMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 725</value>
+    <value>268, 725</value>
   </data>
   <data name="tsMain.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1588,7 +1609,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="pToolbars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 725</value>
+    <value>268, 725</value>
   </data>
   <data name="pToolbars.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1657,7 +1678,7 @@
     <value>None</value>
   </data>
   <data name="dgvHotkeys.Size" type="System.Drawing.Size, System.Drawing">
-    <value>994, 700</value>
+    <value>974, 700</value>
   </data>
   <data name="dgvHotkeys.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1687,7 +1708,7 @@
     <value>24, 25, 0, 0</value>
   </data>
   <data name="pHotkeys.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1018, 725</value>
+    <value>998, 725</value>
   </data>
   <data name="pHotkeys.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1717,7 +1738,7 @@
     <value>6, 8, 6, 8</value>
   </data>
   <data name="ucTaskThumbnailView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1018, 725</value>
+    <value>998, 725</value>
   </data>
   <data name="ucTaskThumbnailView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1738,13 +1759,13 @@
     <value>Fill</value>
   </data>
   <data name="pMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 0</value>
+    <value>268, 0</value>
   </data>
   <data name="pMain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="pMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1018, 725</value>
+    <value>998, 725</value>
   </data>
   <data name="pMain.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2062,6 +2083,18 @@
     <value>tsbHotkeySettings</value>
   </data>
   <data name="&gt;&gt;tsbHotkeySettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripCaseButton.Name" xml:space="preserve">
+    <value>toolStripCaseButton</value>
+  </data>
+  <data name="&gt;&gt;toolStripCaseButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tssMain3.Name" xml:space="preserve">

@@ -1,16 +1,17 @@
 ﻿using Newtonsoft.Json;
+using ShareX.HelpersLib;
 using System;
+using System.Configuration;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ShareX.HelpersLib;
 
 namespace ShareX.Forms
 {
     public partial class LoginForm : Form
     {
-        private const string DIRECTUS_API_URL = "https://api.staging.imgen-legal.click";
+        private readonly string DirectusBaseUrl = ConfigurationManager.AppSettings["DirectusBaseUrl"];
         private const string LOGIN_ENDPOINT = "/auth/login";
 
         public string UserEmail { get; private set; }
@@ -47,7 +48,7 @@ namespace ShareX.Forms
                     string json = JsonConvert.SerializeObject(loginData);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    HttpResponseMessage response = await client.PostAsync($"{DIRECTUS_API_URL}{LOGIN_ENDPOINT}", content);
+                    HttpResponseMessage response = await client.PostAsync($"{DirectusBaseUrl}{LOGIN_ENDPOINT}", content);
 
                     await HandleLoginResponseAsync(response, email);
                 }

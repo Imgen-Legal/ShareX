@@ -366,6 +366,8 @@ namespace ShareX
             {
                 if (loginForm.ShowDialog() == DialogResult.OK)
                 {
+                    ShowCaseSelectionAndMainForm();
+                    return;
                     DebugHelper.WriteLine("MainForm init started.");
                     MainForm = new MainForm();
                     MainForm.UserEmail = SessionManager.UserEmail;
@@ -395,6 +397,23 @@ namespace ShareX
                 var (success, error) = SessionManager.RefreshSessionAsync().GetAwaiter().GetResult();
 
                 if (success)
+                {
+                    ShowCaseSelectionAndMainForm();
+                }
+                else
+                {
+                    Application.Exit();
+                }
+            }
+
+            CloseSequence();
+        }
+
+        private static void ShowCaseSelectionAndMainForm()
+        {
+            using (var caseForm = new CaseSelectionForm())
+            {
+                if (caseForm.ShowDialog() == DialogResult.OK)
                 {
                     DebugHelper.WriteLine("MainForm init started.");
                     MainForm = new MainForm();

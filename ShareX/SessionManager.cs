@@ -2,6 +2,7 @@
 using ShareX.Forms;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace ShareX
 {
     public static class SessionManager
     {
-        private const string DIRECTUS_API_URL = "https://api.staging.imgen-legal.click";
+        private static readonly string DirectusBaseUrl = ConfigurationManager.AppSettings["DirectusBaseUrl"];
         private const string REFRESH_ENDPOINT = "/auth/refresh";
 
         private static readonly HttpClient client = new HttpClient();
@@ -36,7 +37,7 @@ namespace ShareX
 
                 client.Timeout = TimeSpan.FromSeconds(30);
 
-                HttpResponseMessage response = await client.PostAsync($"{DIRECTUS_API_URL}{REFRESH_ENDPOINT}", content);
+                HttpResponseMessage response = await client.PostAsync($"{DirectusBaseUrl}{REFRESH_ENDPOINT}", content);
 
                 if (response.IsSuccessStatusCode)
                 {

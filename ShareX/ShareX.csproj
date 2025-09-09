@@ -8,6 +8,7 @@
     <Description>Screen capture, file sharing and productivity tool</Description>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Design" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Web" />

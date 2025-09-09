@@ -136,9 +136,20 @@ namespace ShareX
         AddImageEffects = 1 << 3,
         AnnotateImage = 1 << 4,
         CopyImageToClipboard = 1 << 5,
+        PinToScreen = 1 << 6,
+        SendImageToPrinter = 1 << 7,
         SaveImageToFile = 1 << 8,
         SaveImageToFileWithDialog = 1 << 9,
+        SaveThumbnailImageToFile = 1 << 10,
+        PerformActions = 1 << 11,
+        CopyFileToClipboard = 1 << 12,
+        CopyFilePathToClipboard = 1 << 13,
+        ShowInExplorer = 1 << 14,
+        ScanQRCode = 1 << 15,
         DoOCR = 1 << 16,
+        ShowBeforeUploadWindow = 1 << 17,
+        UploadImageToHost = 1 << 18,
+        DeleteFile = 1 << 19
     }
 
     [Flags]

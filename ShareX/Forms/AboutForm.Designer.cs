@@ -32,23 +32,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
-            this.lblProductName = new System.Windows.Forms.Label();
             this.rtbInfo = new ShareX.HelpersLib.ReadOnlyRichTextBox();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnShareXLicense = new System.Windows.Forms.Button();
-            this.btnLicenses = new System.Windows.Forms.Button();
-            this.lblBuild = new System.Windows.Forms.Label();
             this.cLogo = new ShareX.HelpersLib.Canvas();
-            this.uclUpdate = new ShareX.HelpersLib.UpdateCheckerLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblProductName
-            // 
-            resources.ApplyResources(this.lblProductName, "lblProductName");
-            this.lblProductName.BackColor = System.Drawing.Color.Transparent;
-            this.lblProductName.Name = "lblProductName";
             // 
             // rtbInfo
             // 
@@ -75,35 +64,11 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // btnShareXLicense
-            // 
-            resources.ApplyResources(this.btnShareXLicense, "btnShareXLicense");
-            this.btnShareXLicense.Name = "btnShareXLicense";
-            this.btnShareXLicense.UseVisualStyleBackColor = true;
-            this.btnShareXLicense.Click += new System.EventHandler(this.btnShareXLicense_Click);
-            // 
-            // btnLicenses
-            // 
-            resources.ApplyResources(this.btnLicenses, "btnLicenses");
-            this.btnLicenses.Name = "btnLicenses";
-            this.btnLicenses.UseVisualStyleBackColor = true;
-            this.btnLicenses.Click += new System.EventHandler(this.btnLicenses_Click);
-            // 
-            // lblBuild
-            // 
-            resources.ApplyResources(this.lblBuild, "lblBuild");
-            this.lblBuild.Name = "lblBuild";
-            // 
             // cLogo
             // 
             resources.ApplyResources(this.cLogo, "cLogo");
             this.cLogo.Interval = 100;
             this.cLogo.Name = "cLogo";
-            // 
-            // uclUpdate
-            // 
-            resources.ApplyResources(this.uclUpdate, "uclUpdate");
-            this.uclUpdate.Name = "uclUpdate";
             // 
             // AboutForm
             // 
@@ -112,13 +77,8 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.pbLogo);
             this.Controls.Add(this.cLogo);
-            this.Controls.Add(this.lblProductName);
-            this.Controls.Add(this.lblBuild);
-            this.Controls.Add(this.btnLicenses);
-            this.Controls.Add(this.btnShareXLicense);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.rtbInfo);
-            this.Controls.Add(this.uclUpdate);
             this.Name = "AboutForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Shown += new System.EventHandler(this.AboutForm_Shown);
@@ -129,15 +89,9 @@
         }
 
         #endregion Windows Form Designer generated code
-
-        private System.Windows.Forms.Label lblProductName;
         private HelpersLib.Canvas cLogo;
         private HelpersLib.ReadOnlyRichTextBox rtbInfo;
-        private HelpersLib.UpdateCheckerLabel uclUpdate;
         private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnShareXLicense;
-        private System.Windows.Forms.Button btnLicenses;
-        private System.Windows.Forms.Label lblBuild;
     }
 }
