@@ -1821,7 +1821,7 @@
             this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnLogout.FlatAppearance.BorderSize = 0;
             this.btnLogout.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnLogout.Image = global::ShareX.Properties.Resources.logout__2_;
+            this.btnLogout.Image = global::ShareX.Properties.Resources.logout_icon;
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);

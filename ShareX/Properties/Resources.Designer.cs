@@ -2074,9 +2074,9 @@ namespace ShareX.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap logout__2_ {
+        internal static System.Drawing.Bitmap logout_icon {
             get {
-                object obj = ResourceManager.GetObject("logout (2)", resourceCulture);
+                object obj = ResourceManager.GetObject("logout_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
