@@ -367,16 +367,11 @@ namespace ShareX
                 if (loginForm.ShowDialog() == DialogResult.OK)
                 {
                     ShowCaseSelectionAndMainForm();
-                    return;
-                    DebugHelper.WriteLine("MainForm init started.");
-                    MainForm = new MainForm();
-                    MainForm.UserEmail = SessionManager.UserEmail;
-                    DebugHelper.WriteLine("MainForm init finished.");
-                    Application.Run(MainForm);
                 }
                 else
                 {
                     Application.Exit();
+                    return;
                 }
             }
 
@@ -393,20 +388,20 @@ namespace ShareX
                 SessionManager.RefreshToken = refreshToken;
                 SessionManager.UserEmail = email;
 
-
                 var (success, error) = SessionManager.RefreshSessionAsync().GetAwaiter().GetResult();
 
                 if (success)
                 {
                     ShowCaseSelectionAndMainForm();
+                    return true;
                 }
                 else
                 {
-                    Application.Exit();
+                    MessageBox.Show(error, "Login error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
 
-            CloseSequence();
+            return false;
         }
 
         private static void ShowCaseSelectionAndMainForm()
@@ -418,19 +413,16 @@ namespace ShareX
                     DebugHelper.WriteLine("MainForm init started.");
                     MainForm = new MainForm();
                     MainForm.UserEmail = SessionManager.UserEmail;
-                    MainForm.UpdateUserEmailLabel();
+                    MainForm.CurrentCase = caseForm.SelectedCase;
+                    MainForm.CurrentPatients = caseForm.SelectedPatients;
+                    MainForm.UpdateCaseInfo();
                     DebugHelper.WriteLine("MainForm init finished.");
+
                     Application.Run(MainForm);
+
                     CloseSequence();
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show(error, "Login error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-
-            return false;
         }
 
         public static void CloseSequence()
