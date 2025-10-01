@@ -49,40 +49,7 @@ namespace ShareX.Forms
 
                     HttpResponseMessage response = await client.PostAsync($"{DIRECTUS_API_URL}{LOGIN_ENDPOINT}", content);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        var loginResponse = JsonConvert.DeserializeObject<DirectusLoginResponse>(responseBody);
-
-                        string accessToken = loginResponse.Data.AccessToken;
-                        string refreshToken = loginResponse.Data.RefreshToken;
-
-                        SessionManager.AccessToken = accessToken;
-                        SessionManager.RefreshToken = refreshToken;
-
-                        SessionManager.UserEmail = email;
-
-                        TokenManager.SaveTokens(accessToken, refreshToken, email);
-
-                        SessionManager.UserEmail = email;
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                    else
-                    {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        var errorResponse = JsonConvert.DeserializeObject<DirectusErrorResponse>(responseBody);
-                        string errorMessage = errorResponse.Errors[0].Message;
-
-                        if (errorMessage == "Invalid user credentials.")
-                        {
-                            MessageBox.Show("Invalid user credentials.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-                            MessageBox.Show($"An error occurred: {errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
+                    await HandleLoginResponseAsync(response, email);
                 }
             }
             catch (HttpRequestException)
@@ -96,35 +63,42 @@ namespace ShareX.Forms
             }
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
+        private async Task HandleLoginResponseAsync(HttpResponseMessage response, string email)
         {
+            if (response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var loginResponse = JsonConvert.DeserializeObject<DirectusLoginResponse>(responseBody);
+
+                string accessToken = loginResponse.Data.AccessToken;
+                string refreshToken = loginResponse.Data.RefreshToken;
+
+                SessionManager.AccessToken = accessToken;
+                SessionManager.RefreshToken = refreshToken;
+                SessionManager.UserEmail = email;
+
+                TokenManager.SaveTokens(accessToken, refreshToken, email);
+
+                SessionManager.UserEmail = email;
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var errorResponse = JsonConvert.DeserializeObject<DirectusErrorResponse>(responseBody);
+                string errorMessage = errorResponse.Errors[0].Message;
+
+                if (errorMessage == "Invalid user credentials.")
+                {
+                    MessageBox.Show("Invalid user credentials.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"An error occurred: {errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
-    }
-
-    public class DirectusTokenData
-    {
-        [JsonProperty("access_token")]
-        public string AccessToken { get; set; }
-
-        [JsonProperty("refresh_token")]
-        public string RefreshToken { get; set; }
-    }
-
-    public class DirectusLoginResponse
-    {
-        [JsonProperty("data")]
-        public DirectusTokenData Data { get; set; }
-    }
-
-    public class DirectusErrorDetail
-    {
-        [JsonProperty("message")]
-        public string Message { get; set; }
-    }
-
-    public class DirectusErrorResponse
-    {
-        [JsonProperty("errors")]
-        public DirectusErrorDetail[] Errors { get; set; }
     }
 }

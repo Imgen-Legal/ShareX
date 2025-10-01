@@ -356,32 +356,10 @@ namespace ShareX
             CleanupManager.CleanupAsync();
             Helpers.TryFixHandCursor();
 
-            var (accessToken, refreshToken, email) = TokenManager.LoadTokens();
 
-
-            if (!string.IsNullOrEmpty(accessToken) && !string.IsNullOrEmpty(refreshToken))
+            if (AttemptTokenLogin())
             {
-                SessionManager.AccessToken = accessToken;
-                SessionManager.RefreshToken = refreshToken;
-                SessionManager.UserEmail = email;
-
-                var (success, error) = SessionManager.RefreshSessionAsync().GetAwaiter().GetResult();
-
-                if (success)
-                {
-                    DebugHelper.WriteLine("MainForm init started.");
-                    MainForm = new MainForm();
-                    MainForm.UserEmail = SessionManager.UserEmail;
-                    MainForm.UpdateUserEmailLabel();
-                    DebugHelper.WriteLine("MainForm init finished.");
-                    Application.Run(MainForm);
-                    CloseSequence();
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show(error, "Login error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                return;
             }
 
             using (LoginForm loginForm = new LoginForm())
@@ -401,6 +379,39 @@ namespace ShareX
             }
 
             CloseSequence();
+        }
+
+        private static bool AttemptTokenLogin()
+        {
+            var (accessToken, refreshToken, email) = TokenManager.LoadTokens();
+
+            if (!string.IsNullOrEmpty(accessToken) && !string.IsNullOrEmpty(refreshToken))
+            {
+                SessionManager.AccessToken = accessToken;
+                SessionManager.RefreshToken = refreshToken;
+                SessionManager.UserEmail = email;
+
+
+                var (success, error) = SessionManager.RefreshSessionAsync().GetAwaiter().GetResult();
+
+                if (success)
+                {
+                    DebugHelper.WriteLine("MainForm init started.");
+                    MainForm = new MainForm();
+                    MainForm.UserEmail = SessionManager.UserEmail;
+                    MainForm.UpdateUserEmailLabel();
+                    DebugHelper.WriteLine("MainForm init finished.");
+                    Application.Run(MainForm);
+                    CloseSequence();
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show(error, "Login error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+
+            return false;
         }
 
         public static void CloseSequence()
