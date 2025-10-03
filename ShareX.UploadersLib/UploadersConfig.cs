@@ -83,6 +83,14 @@ namespace ShareX.UploadersLib
 
         #endregion vgy.me
 
+        #region Directus
+
+            public string DirectusAccessToken { get; set; } = null;
+
+            public string DirectusSessionPatientId { get; set; } = null;
+            public string DirectusSessionMetadata { get; set; } = null;
+        #endregion Directus
+
         #endregion Image uploaders
 
         #region Text uploaders

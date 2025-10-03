@@ -2153,7 +2153,7 @@ namespace ShareX.ScreenCaptureLib.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Run after capture tasks (Enter).
+        ///   Looks up a localized string similar to Save &amp; Send to Builder (Enter).
         /// </summary>
         internal static string ShapeManager_CreateToolbar_RunAfterCaptureTasks {
             get {

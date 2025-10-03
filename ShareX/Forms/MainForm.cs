@@ -97,6 +97,11 @@ namespace ShareX
             }
         }
 
+        private void TaskThumbnailPanel_UploadRequested(object sender, EventArgs e)
+        {
+            this.tsmiUploadSelectedFile_Click(sender, EventArgs.Empty);
+        }
+
         private bool forceClose, trayMenuSaveSettings = true;
         private int trayClickCount = 0;
         private UploadInfoManager uim;
@@ -122,6 +127,17 @@ namespace ShareX
             InitializeControls();
 
             this.toolStripCaseButton.Click += this.ToolStripCaseButton_Click;
+            TaskManager.TaskThumbnailView.UploadFileRequest += UcTaskThumbnailView_UploadFileRequest;
+        }
+
+        public void OnCustomUploadRequested()
+        {
+            this.tsmiUploadSelectedFile_Click(this, EventArgs.Empty);
+        }
+
+        private void UcTaskThumbnailView_UploadFileRequest(object sender, EventArgs e)
+        {
+            this.tsmiUploadSelectedFile_Click(sender, EventArgs.Empty);
         }
 
         public void UpdateUserEmailLabel()
@@ -175,7 +191,8 @@ namespace ShareX
 
             AfterCaptureTasks[] ignoreAfterCaptureTasks = new AfterCaptureTasks[] { AfterCaptureTasks.None, AfterCaptureTasks.ShowQuickTaskMenu, AfterCaptureTasks.ShowAfterCaptureWindow, AfterCaptureTasks.PinToScreen,
             AfterCaptureTasks.SendImageToPrinter, AfterCaptureTasks.SaveThumbnailImageToFile, AfterCaptureTasks.CopyFilePathToClipboard, AfterCaptureTasks.CopyFilePathToClipboard,
-            AfterCaptureTasks.ShowInExplorer , AfterCaptureTasks.ScanQRCode, AfterCaptureTasks.DoOCR, AfterCaptureTasks.ShowBeforeUploadWindow, AfterCaptureTasks.DeleteFile, AfterCaptureTasks.CopyFileToClipboard };
+            AfterCaptureTasks.ShowInExplorer , AfterCaptureTasks.ScanQRCode, AfterCaptureTasks.DoOCR, AfterCaptureTasks.ShowBeforeUploadWindow, AfterCaptureTasks.DeleteFile, AfterCaptureTasks.CopyFileToClipboard,
+            AfterCaptureTasks.PerformActions, AfterCaptureTasks.UploadImageToHost};
 
             AddMultiEnumItems<AfterCaptureTasks>(x => Program.DefaultTaskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Swap(x),
                 new ToolStripDropDownItem[] { tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks }, ignoreAfterCaptureTasks);

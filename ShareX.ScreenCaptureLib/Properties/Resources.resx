@@ -741,7 +741,7 @@ X: {4} Y: {5}</value>
     <value>Tip: You can pan image by holding mouse middle button and dragging.</value>
   </data>
   <data name="ShapeManager_CreateToolbar_RunAfterCaptureTasks" xml:space="preserve">
-    <value>Run after capture tasks (Enter)</value>
+    <value>Save &amp; Send to Builder (Enter)</value>
   </data>
   <data name="ShapeManager_CreateContextMenu_RememberMenuState" xml:space="preserve">
     <value>Remember menu state</value>

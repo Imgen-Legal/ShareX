@@ -77,6 +77,7 @@ namespace ShareX.Forms
                 SessionManager.AccessToken = accessToken;
                 SessionManager.RefreshToken = refreshToken;
                 SessionManager.UserEmail = email;
+                Program.UploadersConfig.DirectusAccessToken = accessToken;
 
                 TokenManager.SaveTokens(accessToken, refreshToken, email);
 

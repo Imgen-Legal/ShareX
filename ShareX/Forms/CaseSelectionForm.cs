@@ -95,6 +95,8 @@ namespace ShareX.Forms
                 var patientId = SelectedPatients.First().Id;
 
                 string fullUrl = $"{PresentationBuilderUrl}/{caseId}?selectedPatient=\"{patientId}\"";
+                Program.UploadersConfig.DirectusSessionPatientId = patientId;
+                Program.UploadersConfig.DirectusSessionMetadata = "test";
 
                 Process.Start(new ProcessStartInfo(fullUrl) { UseShellExecute = true });
             }

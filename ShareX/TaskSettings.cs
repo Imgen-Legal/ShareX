@@ -59,7 +59,7 @@ namespace ShareX
         public AfterUploadTasks AfterUploadJob = AfterUploadTasks.CopyURLToClipboard;
 
         public bool UseDefaultDestinations = true;
-        public ImageDestination ImageDestination = ImageDestination.Imgur;
+        public ImageDestination ImageDestination = ImageDestination.Directus;
         public FileDestination ImageFileDestination = FileDestination.Dropbox;
         public TextDestination TextDestination = TextDestination.Pastebin;
         public FileDestination TextFileDestination = FileDestination.Dropbox;
@@ -424,8 +424,8 @@ namespace ShareX
 
         public bool UseCustomTimeZone = false;
         public TimeZoneInfo CustomTimeZone = TimeZoneInfo.Utc;
-        public string NameFormatPattern = "%ra{10}";
-        public string NameFormatPatternActiveWindow = "%pn_%ra{10}";
+        public string NameFormatPattern = "%y-%mo-%dT%h_%mi_%s_%ra{4}";
+        public string NameFormatPatternActiveWindow = "%y-%mo-%dT%h_%mi_%s_%ra{4}";
         public bool FileUploadUseNamePattern = false;
         public bool FileUploadReplaceProblematicCharacters = false;
         public bool URLRegexReplace = false;
