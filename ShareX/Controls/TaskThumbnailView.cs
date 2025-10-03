@@ -42,6 +42,8 @@ namespace ShareX
         public List<TaskThumbnailPanel> Panels { get; private set; }
         public List<TaskThumbnailPanel> SelectedPanels { get; private set; }
 
+        public event EventHandler UploadFileRequest;
+
         public TaskThumbnailPanel SelectedPanel
         {
             get
@@ -190,7 +192,27 @@ namespace ShareX
             panel.MouseDown += (object sender, MouseEventArgs e) => Panel_MouseDown(e, panel);
             panel.MouseUp += Panel_MouseUp;
             panel.ImagePreviewRequested += Panel_ImagePreviewRequested;
+            panel.UploadRequested += Panel_UploadRequested;
             return panel;
+        }
+
+        private void Panel_UploadRequested(object sender, EventArgs e)
+        {
+            TaskThumbnailPanel panel = sender as TaskThumbnailPanel;
+
+            if (panel == null) return;
+
+            UnselectAllPanels(panel);
+            panel.Selected = true;
+            SelectedPanels.Add(panel);
+
+            OnSelectedPanelChanged();
+
+            this.UploadFileRequest?.Invoke(sender, e);
+        }
+        protected void OnUploadFileRequest(object sender, EventArgs e)
+        {
+            UploadFileRequest?.Invoke(sender, e);
         }
 
         public TaskThumbnailPanel AddPanel(WorkerTask task)

@@ -1,4 +1,7 @@
-﻿namespace ShareX
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace ShareX
 {
     partial class TaskThumbnailPanel
     {
@@ -41,6 +44,8 @@
             this.lblCombineHorizontal = new ShareX.HelpersLib.BlackStyleLabel();
             this.pbProgress = new ShareX.HelpersLib.BlackStyleProgressBar();
             this.pbThumbnail = new System.Windows.Forms.PictureBox();
+            this.btnUpload = new System.Windows.Forms.Button();
+            this.pbCloudStatus = new System.Windows.Forms.PictureBox();
             this.pThumbnail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbThumbnail)).BeginInit();
             this.SuspendLayout();
@@ -71,6 +76,8 @@
             this.pThumbnail.Controls.Add(this.lblError);
             this.pThumbnail.Controls.Add(this.lblCombineHorizontal);
             this.pThumbnail.Controls.Add(this.pbProgress);
+            this.pThumbnail.Controls.Add(this.pbCloudStatus);
+            this.pThumbnail.Controls.Add(this.btnUpload);
             this.pThumbnail.Controls.Add(this.pbThumbnail);
             resources.ApplyResources(this.pThumbnail, "pThumbnail");
             this.pThumbnail.Name = "pThumbnail";
@@ -130,6 +137,36 @@
             this.pbThumbnail.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbThumbnail_MouseDown);
             this.pbThumbnail.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbThumbnail_MouseMove);
             this.pbThumbnail.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbThumbnail_MouseUp);
+            //
+            // btnUpload
+            //
+            this.btnUpload.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnUpload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btnUpload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpload.ForeColor = System.Drawing.Color.White;
+            this.btnUpload.FlatStyle = FlatStyle.Flat;
+            this.btnUpload.FlatAppearance.BorderSize = 0;
+            this.btnUpload.Location = new System.Drawing.Point(5, 5);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(100, 20);
+            this.btnUpload.Text = "Send to builder";
+            this.btnUpload.UseVisualStyleBackColor = false;
+            this.btnUpload.Visible = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            //
+            // pbCloudStatus
+            //
+
+            Image original = global::ShareX.Properties.Resources.drive_globe;
+            Image resized = new Bitmap(original, new Size(26, 26));
+
+            this.pbCloudStatus.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pbCloudStatus.BackColor = System.Drawing.Color.Transparent;
+            this.pbCloudStatus.Image = resized;
+            this.pbCloudStatus.Location = new System.Drawing.Point(5, 5);
+            this.pbCloudStatus.Name = "pbCloudStatus";
+            this.pbCloudStatus.Size = new System.Drawing.Size(20, 20);
+            this.pbCloudStatus.Visible = false;
             // 
             // TaskThumbnailPanel
             // 
@@ -141,6 +178,7 @@
             this.Name = "TaskThumbnailPanel";
             this.pThumbnail.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbThumbnail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCloudStatus)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -155,5 +193,7 @@
         private HelpersLib.BlackStyleLabel lblError;
         private HelpersLib.BlackStyleLabel lblCombineHorizontal;
         private HelpersLib.BlackStyleLabel lblCombineVertical;
+        private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.PictureBox pbCloudStatus;
     }
 }

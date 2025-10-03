@@ -34,6 +34,7 @@ namespace ShareX
 {
     public partial class TaskThumbnailPanel : UserControl
     {
+        private bool uploadRequested = false;
         public new event EventHandler MouseEnter
         {
             add
@@ -52,6 +53,39 @@ namespace ShareX
                 pbThumbnail.MouseEnter -= value;
                 pbProgress.MouseEnter -= value;
             }
+        }
+
+        public event EventHandler UploadRequested;
+
+        public void UpdateCloudStatus()
+        {
+            bool isUploaded = this.Task?.Info?.Result?.URL != null;
+
+            if (isUploaded || Task.Status == TaskStatus.Working)
+            {
+                this.pbCloudStatus.Visible = true;
+                this.btnUpload.Visible = false;
+
+                this.ProgressVisible = false;
+                this.pbCloudStatus.BringToFront();
+            }
+            else
+            {
+                this.pbCloudStatus.Visible = false;
+
+                this.btnUpload.Visible = true;
+
+                this.btnUpload.BringToFront();
+            }
+        }
+
+
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            this.uploadRequested = true;
+
+            this.UploadRequested?.Invoke(this, EventArgs.Empty);
+            UpdateCloudStatus();
         }
 
         public new event MouseEventHandler MouseDown
@@ -241,6 +275,9 @@ namespace ShareX
             InitializeComponent();
             UpdateTheme();
             UpdateTitle();
+
+            this.btnUpload.BringToFront();
+            this.pbCloudStatus.BringToFront();
         }
 
         protected void OnImagePreviewRequested()
@@ -307,6 +344,14 @@ namespace ShareX
                 lblTitle.Location = new Point(0, pThumbnail.Height + 2);
                 lblError.Location = new Point((ClientSize.Width - lblError.Width) / 2, pThumbnail.Height - lblError.Height - 1);
             }
+
+            this.btnUpload.Location = new Point(5, 5);
+
+            this.pbCloudStatus.Location = new Point(
+                5 + (this.btnUpload.Width - this.pbCloudStatus.Width) / 2,
+                5 + (this.btnUpload.Height - this.pbCloudStatus.Height) / 2
+            );
+            this.pbCloudStatus.Location = new Point(5, 5);
 
             lblCombineHorizontal.Location = new Point(pbThumbnail.Left, pbThumbnail.Top);
             lblCombineHorizontal.Size = new Size(pbThumbnail.Width, pbThumbnail.Height / 2);
@@ -401,7 +446,13 @@ namespace ShareX
             {
                 pThumbnail.UpdateStatusColor(Task.Status);
                 lblError.Visible = Task.Status == TaskStatus.Failed;
+
+                if (Task.Status == TaskStatus.Failed && this.Task?.Info?.Result?.URL == null)
+                {
+                    this.uploadRequested = false;
+                }
             }
+            UpdateCloudStatus();
 
             UpdateTitle();
         }

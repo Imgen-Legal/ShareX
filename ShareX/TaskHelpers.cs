@@ -1240,7 +1240,7 @@ namespace ShareX
                                 return null;
                             case RegionResult.Region: // Enter
                             case RegionResult.AnnotateRunAfterCaptureTasks:
-                                return form.GetResultImage();
+                                    return form.GetResultImage();
                             case RegionResult.Fullscreen: // Space or right click
                             case RegionResult.AnnotateContinueTask:
                                 return (Bitmap)form.Canvas.Clone();
@@ -1264,7 +1264,7 @@ namespace ShareX
         {
             Program.MainForm.InvokeSafe(() =>
             {
-                UploadManager.UploadImage(bmp, taskSettings);
+                Program.MainForm.OnCustomUploadRequested();
             });
         }
 
