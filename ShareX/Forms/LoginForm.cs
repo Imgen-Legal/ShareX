@@ -13,6 +13,7 @@ namespace ShareX.Forms
     {
         private readonly string DirectusBaseUrl = ConfigurationManager.AppSettings["DirectusBaseUrl"];
         private const string LOGIN_ENDPOINT = "/auth/login";
+        private const string ME_ENDPOINT = "/users/me";
 
         public string UserEmail { get; private set; }
 
@@ -64,6 +65,20 @@ namespace ShareX.Forms
             }
         }
 
+        private void pictureBoxShowPassword_Click(object sender, EventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = !txtPassword.UseSystemPasswordChar;
+
+            if (txtPassword.UseSystemPasswordChar)
+            {
+                pictureBoxShowPassword.Image = global::ShareX.Properties.Resources.eye_hidden;
+            }
+            else
+            {
+                pictureBoxShowPassword.Image = global::ShareX.Properties.Resources.eye;
+            }
+        }
+
         private async Task HandleLoginResponseAsync(HttpResponseMessage response, string email)
         {
             if (response.IsSuccessStatusCode)
@@ -74,14 +89,46 @@ namespace ShareX.Forms
                 string accessToken = loginResponse.Data.AccessToken;
                 string refreshToken = loginResponse.Data.RefreshToken;
 
+                string userId = null;
+                try
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+                        client.DefaultRequestHeaders.Authorization =
+                            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+                        HttpResponseMessage userMeResponse = await client.GetAsync($"{DirectusBaseUrl}{ME_ENDPOINT}");
+
+                        if (userMeResponse.IsSuccessStatusCode)
+                        {
+                            string userMeBody = await userMeResponse.Content.ReadAsStringAsync();
+                            var userMe = JsonConvert.DeserializeObject<DirectusUserMeResponse>(userMeBody);
+
+                            userId = userMe.Data.Id;
+                            loginResponse.UserId = userId;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Login successful, but failed to fetch user ID.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+                catch (HttpRequestException)
+                {
+                    MessageBox.Show("Login successful, but failed to connect to the Directus server to fetch user ID.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
                 SessionManager.AccessToken = accessToken;
                 SessionManager.RefreshToken = refreshToken;
                 SessionManager.UserEmail = email;
+                SessionManager.UserId = userId;
                 Program.UploadersConfig.DirectusAccessToken = accessToken;
+                Program.UploadersConfig.DirectusSessionUser = userId;
 
-                TokenManager.SaveTokens(accessToken, refreshToken, email);
+                TokenManager.SaveTokens(accessToken, refreshToken, email, userId);
 
                 SessionManager.UserEmail = email;
+                SessionManager.UserId = userId;
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

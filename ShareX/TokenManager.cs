@@ -22,15 +22,19 @@ public static class TokenManager
 
         [JsonProperty("email")]
         public string Email { get; set; }
+
+        [JsonProperty("user_id")]
+        public string UserId { get; set; }
     }
 
-    public static void SaveTokens(string accessToken, string refreshToken, string email)
+    public static void SaveTokens(string accessToken, string refreshToken, string email, string userId)
     {
         var tokens = new TokenData
         {
             AccessToken = accessToken,
             RefreshToken = refreshToken,
-            Email = email
+            Email = email,
+            UserId = userId
         };
         string json = JsonConvert.SerializeObject(tokens, Formatting.Indented);
 
@@ -38,7 +42,7 @@ public static class TokenManager
         File.WriteAllText(TokenFilePath, json);
     }
 
-    public static (string AccessToken, string RefreshToken, string Email) LoadTokens()
+    public static (string AccessToken, string RefreshToken, string Email, string UserId) LoadTokens()
     {
         if (File.Exists(TokenFilePath))
         {
@@ -49,7 +53,7 @@ public static class TokenManager
 
                 if (tokens != null)
                 {
-                    return (tokens.AccessToken, tokens.RefreshToken, tokens.Email);
+                    return (tokens.AccessToken, tokens.RefreshToken, tokens.Email, tokens.UserId);
                 }
             }
             catch (Exception ex)
@@ -58,7 +62,7 @@ public static class TokenManager
             }
         }
 
-        return (null, null, null);
+        return (null, null, null, null);
     }
 
     public static void DeleteTokens()

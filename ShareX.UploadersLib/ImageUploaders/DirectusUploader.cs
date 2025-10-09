@@ -20,6 +20,7 @@ namespace ShareX.UploadersLib.ImageUploaders
             {
                 AccessToken = config.DirectusAccessToken,
                 PatientId = config.DirectusSessionPatientId,
+                CapturedBy = config.DirectusSessionUser,
                 Metadata = config.DirectusSessionMetadata
             };
         }
@@ -34,6 +35,7 @@ namespace ShareX.UploadersLib.ImageUploaders
         public string PatientId { get; set; }
         public string Metadata { get; set; }
         public string AccessToken { get; set; }
+        public string CapturedBy { get; set; }
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
@@ -53,6 +55,7 @@ namespace ShareX.UploadersLib.ImageUploaders
 
             NameValueCollection argsCollection = new NameValueCollection();
             argsCollection.Add("patient_id", this.PatientId);
+            argsCollection.Add("user_id", this.CapturedBy);
             argsCollection.Add("metadata", this.Metadata ?? "screenshot");
 
             Dictionary<string, string> argsDictionary = new Dictionary<string, string>();

@@ -18,9 +18,19 @@ namespace ShareX
 
         public static string AccessToken { get; set; }
         public static string RefreshToken { get; set; }
+        public static string UserId { get; set; }
         public static string UserEmail { get; set; }
 
         public static bool IsAuthenticated => !string.IsNullOrEmpty(AccessToken);
+
+        public static void ResetSession()
+        {
+            AccessToken = null;
+            RefreshToken = null;
+            UserEmail = null;
+            UserId = null;
+            TokenManager.DeleteTokens();
+        }
 
         public static async Task<(bool Success, string ErrorMessage)> RefreshSessionAsync()
         {
@@ -47,23 +57,25 @@ namespace ShareX
                     AccessToken = loginResponse.Data.AccessToken;
                     RefreshToken = loginResponse.Data.RefreshToken;
 
-                    TokenManager.SaveTokens(AccessToken, RefreshToken, UserEmail);
+                    TokenManager.SaveTokens(AccessToken, RefreshToken, UserEmail, UserId);
 
                     return (true, null);
                 }
                 else
                 {
+                    ResetSession();
+
                     string responseBody = await response.Content.ReadAsStringAsync();
                     var errorResponse = JsonConvert.DeserializeObject<DirectusErrorResponse>(responseBody);
 
                     if (errorResponse?.Errors?.Count > 0)
                     {
                         string errorMessage = errorResponse.Errors[0].Message;
-                        return (false, $"Server error: {errorMessage}");
+                        return (false, $"Server error: {errorMessage}. Session cleared.");
                     }
                     else
                     {
-                        return (false, $"Unknown server error. Code: {response.StatusCode}");
+                        return (false, $"Unknown server error. Code: {response.StatusCode}. Session cleared.");
                     }
                 }
             }
