@@ -14,6 +14,21 @@ public class DirectusLoginResponse
 {
     [JsonProperty("data")]
     public DirectusTokenData Data { get; set; }
+
+    [JsonIgnore]
+    public string UserId { get; set; }
+}
+
+public class DirectusUserMeResponse
+{
+    [JsonProperty("data")]
+    public DirectusUser Data { get; set; }
+}
+
+public class DirectusUser
+{
+    [JsonProperty("id")]
+    public string Id { get; set; }
 }
 
 public class DirectusErrorDetail

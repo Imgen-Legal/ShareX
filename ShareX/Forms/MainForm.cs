@@ -97,11 +97,6 @@ namespace ShareX
             }
         }
 
-        private void TaskThumbnailPanel_UploadRequested(object sender, EventArgs e)
-        {
-            this.tsmiUploadSelectedFile_Click(sender, EventArgs.Empty);
-        }
-
         private bool forceClose, trayMenuSaveSettings = true;
         private int trayClickCount = 0;
         private UploadInfoManager uim;
@@ -130,14 +125,25 @@ namespace ShareX
             TaskManager.TaskThumbnailView.UploadFileRequest += UcTaskThumbnailView_UploadFileRequest;
         }
 
-        public void OnCustomUploadRequested()
+        public async Task OnCustomUploadRequested()
         {
-            this.tsmiUploadSelectedFile_Click(this, EventArgs.Empty);
+            await this.PerformUploadAndOCRLogicAsync(this, EventArgs.Empty);
         }
 
-        private void UcTaskThumbnailView_UploadFileRequest(object sender, EventArgs e)
+        private async void UcTaskThumbnailView_UploadFileRequest(object sender, EventArgs e)
         {
-            this.tsmiUploadSelectedFile_Click(sender, EventArgs.Empty);
+            await this.PerformUploadAndOCRLogicAsync(sender, EventArgs.Empty);
+        }
+
+        private async Task PerformUploadAndOCRLogicAsync(object sender, EventArgs e)
+        {
+            await this.OCRImageAsync(sender, e);
+            uim.Upload();
+        }
+
+        private async Task OCRImageAsync(object sender, EventArgs e)
+        {
+            await uim.OCRImage();
         }
 
         public void UpdateUserEmailLabel()
@@ -2366,8 +2372,9 @@ namespace ShareX
             uim.CopyCustomFormat(cf.Format);
         }
 
-        private void tsmiUploadSelectedFile_Click(object sender, EventArgs e)
+        private async void tsmiUploadSelectedFileAndOCR_Click(object sender, EventArgs e)
         {
+            await this.OCRImageAsync(this, EventArgs.Empty);
             uim.Upload();
         }
 

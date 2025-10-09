@@ -1525,7 +1525,9 @@ namespace ShareX
 
                 OCROptions options = taskSettings.CaptureSettingsReference.OCROptions;
 
-                string result = await OCRHelper.OCR(bmp, options.Language, options.ScaleFactor, options.SingleLine);
+                string result = await OCRHelper.OCR(bmp, options.Language, options.ScaleFactor, true);
+
+                Program.UploadersConfig.DirectusSessionMetadata = result;
 
                 if (!string.IsNullOrEmpty(result))
                 {

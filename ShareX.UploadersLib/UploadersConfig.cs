@@ -89,6 +89,7 @@ namespace ShareX.UploadersLib
 
             public string DirectusSessionPatientId { get; set; } = null;
             public string DirectusSessionMetadata { get; set; } = null;
+            public string DirectusSessionUser { get; set; } = null;
         #endregion Directus
 
         #endregion Image uploaders

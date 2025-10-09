@@ -17,12 +17,14 @@
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.labelEmail = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.labelPassword = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
-
+            this.pictureBoxShowPassword = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShowPassword)).BeginInit();
             this.SuspendLayout();
             // 
             // labelEmail
@@ -85,27 +87,42 @@
             this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
+            // pictureBoxShowPassword
+            // 
+            this.pictureBoxShowPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.pictureBoxShowPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxShowPassword.Image = global::ShareX.Properties.Resources.eye_hidden;
+            this.pictureBoxShowPassword.Location = new System.Drawing.Point(456, 179);
+            this.pictureBoxShowPassword.Name = "pictureBoxShowPassword";
+            this.pictureBoxShowPassword.Size = new System.Drawing.Size(20, 26);
+            this.pictureBoxShowPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxShowPassword.TabIndex = 5;
+            this.pictureBoxShowPassword.TabStop = false;
+            this.pictureBoxShowPassword.Click += new System.EventHandler(this.pictureBoxShowPassword_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(506, 400);
+            this.Controls.Add(this.pictureBoxShowPassword);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.labelEmail);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Login";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShowPassword)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+
         }
 
         #endregion
@@ -114,5 +131,6 @@
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.PictureBox pictureBoxShowPassword;
     }
 }

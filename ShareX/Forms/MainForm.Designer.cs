@@ -1007,7 +1007,7 @@
             this.tsmiUploadSelectedFile.Image = global::ShareX.Properties.Resources.drive_upload;
             this.tsmiUploadSelectedFile.Name = "tsmiUploadSelectedFile";
             resources.ApplyResources(this.tsmiUploadSelectedFile, "tsmiUploadSelectedFile");
-            this.tsmiUploadSelectedFile.Click += new System.EventHandler(this.tsmiUploadSelectedFile_Click);
+            this.tsmiUploadSelectedFile.Click += new System.EventHandler(this.tsmiUploadSelectedFileAndOCR_Click);
             // 
             // tsmiDownloadSelectedURL
             // 

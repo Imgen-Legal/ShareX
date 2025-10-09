@@ -381,17 +381,19 @@ namespace ShareX
         private static bool AttemptTokenLogin()
         {
             SettingManager.WaitUploadersConfig();
-            var (accessToken, refreshToken, email) = TokenManager.LoadTokens();
+            var (accessToken, refreshToken, email, userId) = TokenManager.LoadTokens();
 
             if (!string.IsNullOrEmpty(accessToken) && !string.IsNullOrEmpty(refreshToken))
             {
                 SessionManager.AccessToken = accessToken;
                 SessionManager.RefreshToken = refreshToken;
                 SessionManager.UserEmail = email;
+                SessionManager.UserId = userId;
 
                 if (Program.UploadersConfig != null)
                 {
                     Program.UploadersConfig.DirectusAccessToken = accessToken;
+                    Program.UploadersConfig.DirectusSessionUser = userId;
                     Program.UploadersConfig.Save();
                 }
 
