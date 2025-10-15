@@ -61,7 +61,6 @@ namespace ShareX
                     task.UploadProgressChanged += Task_UploadProgressChanged;
                     task.UploadCompleted += Task_UploadCompleted;
                     task.TaskCompleted += Task_TaskCompleted;
-                    task.UploadersConfigWindowRequested += Task_UploadersConfigWindowRequested;
                 }
 
                 TaskListView.AddItem(task);

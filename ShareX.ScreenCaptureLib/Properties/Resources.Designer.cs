@@ -1856,7 +1856,7 @@ namespace ShareX.ScreenCaptureLib.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply changes &amp; continue task (Enter).
+        ///   Looks up a localized string similar to Apply changes &amp; Send to builder (Enter).
         /// </summary>
         internal static string ShapeManager_CreateToolbar_ApplyChangesContinueTaskEnter {
             get {

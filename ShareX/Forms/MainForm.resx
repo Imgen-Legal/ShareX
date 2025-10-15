@@ -324,6 +324,9 @@
   <data name="tsmiShowCursor.Text" xml:space="preserve">
     <value>Show cursor</value>
   </data>
+  <data name="tsmiShowCursor.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsddbCapture.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
@@ -349,82 +352,85 @@
     <value>Workflows</value>
   </data>
   <data name="tsmiColorPicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="tsmiColorPicker.Text" xml:space="preserve">
     <value>Color picker...</value>
   </data>
   <data name="tsmiRuler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="tsmiRuler.Text" xml:space="preserve">
     <value>Ruler...</value>
   </data>
   <data name="tssTools1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 6</value>
+    <value>267, 6</value>
   </data>
   <data name="tsmiImageEditor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="tsmiImageEditor.Text" xml:space="preserve">
     <value>Image editor...</value>
   </data>
   <data name="tsmiImageBeautifier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="tsmiImageBeautifier.Text" xml:space="preserve">
     <value>Image beautifier...</value>
   </data>
   <data name="tsmiImageEffects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="tsmiImageEffects.Text" xml:space="preserve">
     <value>Image effects...</value>
   </data>
   <data name="tsmiImageViewer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="tsmiImageViewer.Text" xml:space="preserve">
     <value>Image viewer...</value>
   </data>
   <data name="tsmiImageCombiner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="tsmiImageCombiner.Text" xml:space="preserve">
     <value>Image combiner...</value>
   </data>
   <data name="tsmiImageSplitter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="tsmiImageSplitter.Text" xml:space="preserve">
     <value>Image splitter...</value>
   </data>
   <data name="tssTools2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 6</value>
+    <value>267, 6</value>
   </data>
   <data name="tsmiVideoConverter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="tsmiVideoConverter.Text" xml:space="preserve">
     <value>Video converter...</value>
   </data>
   <data name="tssTools3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 6</value>
+    <value>267, 6</value>
   </data>
   <data name="tsmiOCR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="tsmiOCR.Text" xml:space="preserve">
     <value>OCR...</value>
   </data>
   <data name="tsmiMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="tsmiMetadata.Text" xml:space="preserve">
     <value>Metadata...</value>
   </data>
+  <data name="tsmiMetadata.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tssTools4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 6</value>
+    <value>267, 6</value>
   </data>
   <data name="tsddbTools.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -536,6 +542,9 @@
   </data>
   <data name="tsbTaskSettings.Text" xml:space="preserve">
     <value>Task settings...</value>
+  </data>
+  <data name="tsbTaskSettings.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsbHotkeySettings.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -1029,6 +1038,9 @@
   <data name="tsmiTrayFullscreen.Text" xml:space="preserve">
     <value>Fullscreen</value>
   </data>
+  <data name="tsmiTrayFullscreen.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayWindow.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 34</value>
   </data>
@@ -1053,11 +1065,17 @@
   <data name="tsmiTrayRectangleLight.Text" xml:space="preserve">
     <value>Region (Light)</value>
   </data>
+  <data name="tsmiTrayRectangleLight.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayRectangleTransparent.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 34</value>
   </data>
   <data name="tsmiTrayRectangleTransparent.Text" xml:space="preserve">
     <value>Region (Transparent)</value>
+  </data>
+  <data name="tsmiTrayRectangleTransparent.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsmiTrayLastRegion.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 34</value>
@@ -1083,11 +1101,17 @@
   <data name="tsmiTrayScrollingCapture.Text" xml:space="preserve">
     <value>Scrolling capture...</value>
   </data>
+  <data name="tsmiTrayScrollingCapture.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayAutoCapture.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 34</value>
   </data>
   <data name="tsmiTrayAutoCapture.Text" xml:space="preserve">
     <value>Auto capture...</value>
+  </data>
+  <data name="tsmiTrayAutoCapture.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tssTrayCapture1.Size" type="System.Drawing.Size, System.Drawing">
     <value>285, 6</value>
@@ -1097,6 +1121,9 @@
   </data>
   <data name="tsmiTrayShowCursor.Text" xml:space="preserve">
     <value>Show cursor</value>
+  </data>
+  <data name="tsmiTrayShowCursor.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsmiTrayScreenshotDelay0.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 34</value>
@@ -1139,6 +1166,9 @@
   </data>
   <data name="tsmiTrayScreenshotDelay.Text" xml:space="preserve">
     <value>Screenshot delay</value>
+  </data>
+  <data name="tsmiTrayScreenshotDelay.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsmiTrayCapture.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 32</value>
@@ -1200,6 +1230,9 @@
   <data name="tsmiTrayUpload.Text" xml:space="preserve">
     <value>Upload</value>
   </data>
+  <data name="tsmiTrayUpload.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayWorkflows.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 32</value>
   </data>
@@ -1218,6 +1251,9 @@
   <data name="tsmiTrayScreenColorPicker.Text" xml:space="preserve">
     <value>Screen color picker...</value>
   </data>
+  <data name="tsmiTrayScreenColorPicker.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayRuler.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 34</value>
   </data>
@@ -1229,6 +1265,9 @@
   </data>
   <data name="tsmiTrayPinToScreen.Text" xml:space="preserve">
     <value>Pin to screen...</value>
+  </data>
+  <data name="tsmiTrayPinToScreen.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tssTrayTools1.Size" type="System.Drawing.Size, System.Drawing">
     <value>273, 6</value>
@@ -1275,6 +1314,9 @@
   <data name="tsmiTrayImageThumbnailer.Text" xml:space="preserve">
     <value>Image thumbnailer...</value>
   </data>
+  <data name="tsmiTrayImageThumbnailer.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tssTrayTools2.Size" type="System.Drawing.Size, System.Drawing">
     <value>273, 6</value>
   </data>
@@ -1289,6 +1331,9 @@
   </data>
   <data name="tsmiTrayVideoThumbnailer.Text" xml:space="preserve">
     <value>Video thumbnailer...</value>
+  </data>
+  <data name="tsmiTrayVideoThumbnailer.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tssTrayTools3.Size" type="System.Drawing.Size, System.Drawing">
     <value>273, 6</value>
@@ -1305,11 +1350,17 @@
   <data name="tsmiTrayQRCode.Text" xml:space="preserve">
     <value>QR code...</value>
   </data>
+  <data name="tsmiTrayQRCode.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayHashChecker.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 34</value>
   </data>
   <data name="tsmiTrayHashChecker.Text" xml:space="preserve">
     <value>Hash checker...</value>
+  </data>
+  <data name="tsmiTrayHashChecker.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsmiTrayMetadata.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 34</value>
@@ -1323,6 +1374,9 @@
   <data name="tsmiTrayIndexFolder.Text" xml:space="preserve">
     <value>Directory indexer...</value>
   </data>
+  <data name="tsmiTrayIndexFolder.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tssTrayTools4.Size" type="System.Drawing.Size, System.Drawing">
     <value>273, 6</value>
   </data>
@@ -1332,11 +1386,17 @@
   <data name="tsmiTrayClipboardViewer.Text" xml:space="preserve">
     <value>Clipboard viewer...</value>
   </data>
+  <data name="tsmiTrayClipboardViewer.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayBorderlessWindow.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 34</value>
   </data>
   <data name="tsmiTrayBorderlessWindow.Text" xml:space="preserve">
     <value>Borderless window...</value>
+  </data>
+  <data name="tsmiTrayBorderlessWindow.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsmiTrayInspectWindow.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 34</value>
@@ -1344,11 +1404,17 @@
   <data name="tsmiTrayInspectWindow.Text" xml:space="preserve">
     <value>Inspect window...</value>
   </data>
+  <data name="tsmiTrayInspectWindow.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayMonitorTest.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 34</value>
   </data>
   <data name="tsmiTrayMonitorTest.Text" xml:space="preserve">
     <value>Monitor test...</value>
+  </data>
+  <data name="tsmiTrayMonitorTest.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsmiTrayTools.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 32</value>
@@ -1371,11 +1437,17 @@
   <data name="tsmiTrayAfterUploadTasks.Text" xml:space="preserve">
     <value>After upload tasks</value>
   </data>
+  <data name="tsmiTrayAfterUploadTasks.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayImageUploaders.Size" type="System.Drawing.Size, System.Drawing">
     <value>331, 34</value>
   </data>
   <data name="tsmiTrayImageUploaders.Text" xml:space="preserve">
     <value>Image uploaders</value>
+  </data>
+  <data name="tsmiTrayImageUploaders.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsmiTrayTextUploaders.Size" type="System.Drawing.Size, System.Drawing">
     <value>331, 34</value>
@@ -1383,11 +1455,17 @@
   <data name="tsmiTrayTextUploaders.Text" xml:space="preserve">
     <value>Text uploaders</value>
   </data>
+  <data name="tsmiTrayTextUploaders.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayFileUploaders.Size" type="System.Drawing.Size, System.Drawing">
     <value>331, 34</value>
   </data>
   <data name="tsmiTrayFileUploaders.Text" xml:space="preserve">
     <value>File uploaders</value>
+  </data>
+  <data name="tsmiTrayFileUploaders.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsmiTrayURLShorteners.Size" type="System.Drawing.Size, System.Drawing">
     <value>331, 34</value>
@@ -1395,11 +1473,17 @@
   <data name="tsmiTrayURLShorteners.Text" xml:space="preserve">
     <value>URL shorteners</value>
   </data>
+  <data name="tsmiTrayURLShorteners.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayURLSharingServices.Size" type="System.Drawing.Size, System.Drawing">
     <value>331, 34</value>
   </data>
   <data name="tsmiTrayURLSharingServices.Text" xml:space="preserve">
     <value>URL sharing services</value>
+  </data>
+  <data name="tsmiTrayURLSharingServices.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tssTrayDestinations1.Size" type="System.Drawing.Size, System.Drawing">
     <value>328, 6</value>
@@ -1421,6 +1505,9 @@
   </data>
   <data name="tsmiTrayDestinations.Text" xml:space="preserve">
     <value>Destinations</value>
+  </data>
+  <data name="tsmiTrayDestinations.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsmiTrayApplicationSettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 32</value>
@@ -1446,6 +1533,9 @@
   <data name="tsmiTrayToggleHotkeys.Text" xml:space="preserve">
     <value>Disable hotkeys</value>
   </data>
+  <data name="tsmiTrayToggleHotkeys.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tssTray2.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 6</value>
   </data>
@@ -1455,17 +1545,26 @@
   <data name="tsmiScreenshotsFolder.Text" xml:space="preserve">
     <value>Screenshots folder...</value>
   </data>
+  <data name="tsmiScreenshotsFolder.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayHistory.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 32</value>
   </data>
   <data name="tsmiTrayHistory.Text" xml:space="preserve">
     <value>History...</value>
   </data>
+  <data name="tsmiTrayHistory.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsmiTrayImageHistory.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 32</value>
   </data>
   <data name="tsmiTrayImageHistory.Text" xml:space="preserve">
     <value>Image history...</value>
+  </data>
+  <data name="tsmiTrayImageHistory.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tssTray3.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 6</value>
@@ -1493,6 +1592,9 @@
   </data>
   <data name="tsmiOpenActionsToolbar.Text" xml:space="preserve">
     <value>Toggle actions toolbar</value>
+  </data>
+  <data name="tsmiOpenActionsToolbar.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tsmiTrayShow.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 32</value>
@@ -1793,6 +1895,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1266, 725</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>

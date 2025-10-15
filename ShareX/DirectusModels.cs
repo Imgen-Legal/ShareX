@@ -17,6 +17,9 @@ public class DirectusPatient
     public string Id { get; set; }
     [JsonProperty("first_name")]
     public string FirstName { get; set; }
+    [JsonProperty("middle_name")]
+    public string MiddleName{ get; set; }
+
     [JsonProperty("last_name")]
     public string LastName { get; set; }
     [JsonProperty("case_id")]
@@ -43,6 +46,8 @@ public class CaseDisplayModel
     public string CaseName { get; set; }
     public string Status { get; set; }
     public string PatientName { get; set; }
+
+    public string PatientMiddleName { get; set; }
     public string PatientLastName { get; set; }
     public DirectusCase OriginalCase { get; set; }
     public DirectusPatient OriginalPatient { get; set; }

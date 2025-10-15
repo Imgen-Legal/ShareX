@@ -81,7 +81,7 @@ namespace ShareX
         {
             get
             {
-                string title = $"{AppName} {VersionText}";
+                string title = $"ImgenShareX";
 
                 if (Settings != null && Settings.DevMode)
                 {
@@ -349,7 +349,7 @@ namespace ShareX
             DebugWriteFlags();
 
             SettingManager.LoadInitialSettings();
-
+        
             Uploader.UpdateServicePointManager();
             UpdateManager = new ShareXUpdateManager();
             LanguageHelper.ChangeLanguage(Settings.Language);
@@ -403,10 +403,6 @@ namespace ShareX
                 {
                     ShowCaseSelectionAndMainForm();
                     return true;
-                }
-                else
-                {
-                    MessageBox.Show(error, "Login error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
 

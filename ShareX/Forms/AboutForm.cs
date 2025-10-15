@@ -77,10 +77,15 @@ or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
 the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-General Public License for more details. In accordance with the terms of the GNU General Public License, \
-we provide access to the source code of this modified version.
-To obtain the source code of this modified version, please contact: (Your preferred method of contact,
-e.g. an email address for source code requests)
+General Public License for more details. In accordance with the terms of the GNU General Public License,
+we provide access to the source code of this modified version.", FontStyle.Regular);
+
+            rtbInfo.SelectionFont = new Font(rtbInfo.Font, FontStyle.Bold);
+            rtbInfo.AppendText(@"
+To obtain the source code of this modified version, please contact: ");
+            rtbInfo.SelectionFont = new Font(rtbInfo.Font, FontStyle.Regular);
+            rtbInfo.AppendText(@"Martha Proa, martha.proa@yahoo.com");
+            rtbInfo.AppendLine(@"
 
 A copy of the GNU General Public License was included with the original program. If you did not receive
 a copy, you can view it here: http://www.gnu.org/licenses/.”

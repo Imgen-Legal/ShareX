@@ -102,6 +102,10 @@ namespace ShareX
             // lblError
             // 
             resources.ApplyResources(this.lblError, "lblError");
+
+            this.lblError.Width = 10;
+            this.lblError.Dock = DockStyle.Bottom;
+
             this.lblError.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblError.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblError.ForeColor = System.Drawing.Color.White;

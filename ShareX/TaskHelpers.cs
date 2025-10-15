@@ -1223,7 +1223,7 @@ namespace ShareX
                                 }
 
                                 newFilePath = ImageHelpers.SaveImageFileDialog(output, newFilePath);
-                            }
+                        }
 
                             return newFilePath;
                         };
@@ -1243,6 +1243,7 @@ namespace ShareX
                                     return form.GetResultImage();
                             case RegionResult.Fullscreen: // Space or right click
                             case RegionResult.AnnotateContinueTask:
+                                taskSettings.UploadImageAfterTask = true;
                                 return (Bitmap)form.Canvas.Clone();
                         }
                     }
