@@ -39,7 +39,7 @@ namespace ShareX
         {
             CultureInfo currentCulture;
 
-            if (language == SupportedLanguage.Automatic)
+            if (language == SupportedLanguage.English)
             {
                 currentCulture = CultureInfo.InstalledUICulture;
             }
@@ -74,9 +74,6 @@ namespace ShareX
             switch (language)
             {
                 default:
-                case SupportedLanguage.Automatic:
-                    icon = Resources.globe;
-                    break;
                 case SupportedLanguage.Arabic:
                     icon = Resources.ye;
                     break;

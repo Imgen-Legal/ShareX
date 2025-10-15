@@ -15,6 +15,18 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_56EABE38BB6D408392AC2DDAF2591523"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6E81A36AE96940FFB162012BDC9B65DC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_81D70C3E80704B18A799E8B9E4B810F0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -22,6 +34,12 @@
         "Entry"
         {
         "MsmKey" = "8:_B59CD11B02E24DB190F15A4EB089A75F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D273BB53A8C945B79976F248689C865E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -43,6 +61,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -59,12 +93,56 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_6AAE21827DC64F2FAC89624B044DF486"
+            {
+            "Name" = "8:KillProcess.vbs"
+            "Condition" = "8:"
+            "Object" = "8:_56EABE38BB6D408392AC2DDAF2591523"
+            "FileType" = "3:4"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:2"
+            "Identifier" = "8:_65D7EA10_181A_4C18_9D78_389105A3950A"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_A16C5A0A657A4FE3A4552DAB0723E23A"
+            {
+            "Name" = "8:CleanupScript.vbs"
+            "Condition" = "8:REMOVE=\"ALL\""
+            "Object" = "8:_D273BB53A8C945B79976F248689C865E"
+            "FileType" = "3:4"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_98C9BD4A_67E9_49C8_9936_F818B7C6C23F"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -88,10 +166,70 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_56EABE38BB6D408392AC2DDAF2591523"
+            {
+            "SourcePath" = "8:..\\KillProcess.vbs"
+            "TargetName" = "8:KillProcess.vbs"
+            "Tag" = "8:"
+            "Folder" = "8:_87AF4548EC9A48868132C2EE91C98E71"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6E81A36AE96940FFB162012BDC9B65DC"
+            {
+            "SourcePath" = "8:..\\..\\ffmpeg.exe"
+            "TargetName" = "8:ffmpeg.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_87AF4548EC9A48868132C2EE91C98E71"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B59CD11B02E24DB190F15A4EB089A75F"
             {
             "SourcePath" = "8:..\\ShareX\\ShareX_Icon.ico"
             "TargetName" = "8:ShareX_Icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_87AF4548EC9A48868132C2EE91C98E71"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D273BB53A8C945B79976F248689C865E"
+            {
+            "SourcePath" = "8:..\\CleanupScript.vbs"
+            "TargetName" = "8:CleanupScript.vbs"
             "Tag" = "8:"
             "Folder" = "8:_87AF4548EC9A48868132C2EE91C98E71"
             "Condition" = "8:"
@@ -164,15 +302,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ImgenShareX"
-        "ProductCode" = "8:{2DC864CC-B44A-4EDB-A167-7CB0BDA3BC7C}"
-        "PackageCode" = "8:{BB77AF81-C7C4-4A41-A997-9F3F3DFAAB4B}"
+        "ProductCode" = "8:{EBE9281A-CFD6-45CA-92FE-5A04FE75E772}"
+        "PackageCode" = "8:{BD58433B-D813-4F62-B750-A32DDAAB40AB}"
         "UpgradeCode" = "8:{5F81D768-D789-4314-A55B-39AFD63B7BB7}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.2"
         "Manufacturer" = "8:itransition.corp"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -285,7 +423,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6856D865A4F342F8A3DE8A20C4A01847"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_84F3D0B99D5F4E16B7B251E4A6BB8057"
             {
             "Name" = "8:ImgenShareX"
             "Arguments" = "8:"
@@ -293,9 +431,9 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_5BD349E444E5408E9CA97A09F7F9E9DA"
+            "Target" = "8:_81D70C3E80704B18A799E8B9E4B810F0"
             "Folder" = "8:_5BD349E444E5408E9CA97A09F7F9E9DA"
-            "WorkingFolder" = "8:_5BD349E444E5408E9CA97A09F7F9E9DA"
+            "WorkingFolder" = "8:_87AF4548EC9A48868132C2EE91C98E71"
             "Icon" = "8:_B59CD11B02E24DB190F15A4EB089A75F"
             "Feature" = "8:"
             }

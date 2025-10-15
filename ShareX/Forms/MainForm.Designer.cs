@@ -593,6 +593,7 @@
             resources.ApplyResources(this.tsddbDestinations, "tsddbDestinations");
             this.tsddbDestinations.Name = "tsddbDestinations";
             this.tsddbDestinations.DropDownOpened += new System.EventHandler(this.tsddbDestinations_DropDownOpened);
+            this.tsddbDestinations.Visible = false;
             // 
             // tsmiImageUploaders
             // 
@@ -1219,6 +1220,7 @@
             this.tsmiTrayFullscreen.Name = "tsmiTrayFullscreen";
             resources.ApplyResources(this.tsmiTrayFullscreen, "tsmiTrayFullscreen");
             this.tsmiTrayFullscreen.Click += new System.EventHandler(this.tsmiTrayFullscreen_Click);
+            this.tsmiTrayFullscreen.Visible = false;
             // 
             // tsmiTrayWindow
             // 
@@ -1245,6 +1247,7 @@
             this.tsmiTrayRectangleLight.Name = "tsmiTrayRectangleLight";
             resources.ApplyResources(this.tsmiTrayRectangleLight, "tsmiTrayRectangleLight");
             this.tsmiTrayRectangleLight.Click += new System.EventHandler(this.tsmiTrayRectangleLight_Click);
+            this.tsmiTrayRectangleLight.Visible = false;
             // 
             // tsmiTrayRectangleTransparent
             // 
@@ -1252,6 +1255,7 @@
             this.tsmiTrayRectangleTransparent.Name = "tsmiTrayRectangleTransparent";
             resources.ApplyResources(this.tsmiTrayRectangleTransparent, "tsmiTrayRectangleTransparent");
             this.tsmiTrayRectangleTransparent.Click += new System.EventHandler(this.tsmiTrayRectangleTransparent_Click);
+            this.tsmiTrayRectangleTransparent.Visible = false;
             // 
             // tsmiTrayLastRegion
             // 
@@ -1280,6 +1284,7 @@
             this.tsmiTrayScrollingCapture.Name = "tsmiTrayScrollingCapture";
             resources.ApplyResources(this.tsmiTrayScrollingCapture, "tsmiTrayScrollingCapture");
             this.tsmiTrayScrollingCapture.Click += new System.EventHandler(this.tsmiScrollingCapture_Click);
+            this.tsmiTrayScrollingCapture.Visible = false;
             // 
             // tsmiTrayAutoCapture
             // 
@@ -1287,6 +1292,7 @@
             this.tsmiTrayAutoCapture.Name = "tsmiTrayAutoCapture";
             resources.ApplyResources(this.tsmiTrayAutoCapture, "tsmiTrayAutoCapture");
             this.tsmiTrayAutoCapture.Click += new System.EventHandler(this.tsmiAutoCapture_Click);
+            this.tsmiTrayAutoCapture.Visible = false;
             // 
             // tssTrayCapture1
             // 
@@ -1300,6 +1306,7 @@
             this.tsmiTrayShowCursor.Name = "tsmiTrayShowCursor";
             resources.ApplyResources(this.tsmiTrayShowCursor, "tsmiTrayShowCursor");
             this.tsmiTrayShowCursor.Click += new System.EventHandler(this.tsmiShowCursor_Click);
+            this.tsmiTrayShowCursor.Visible = false;
             // 
             // tsmiTrayScreenshotDelay
             // 
@@ -1313,12 +1320,14 @@
             this.tsmiTrayScreenshotDelay.Image = global::ShareX.Properties.Resources.clock_select;
             this.tsmiTrayScreenshotDelay.Name = "tsmiTrayScreenshotDelay";
             resources.ApplyResources(this.tsmiTrayScreenshotDelay, "tsmiTrayScreenshotDelay");
+            this.tsmiTrayScreenshotDelay.Visible = false;
             // 
             // tsmiTrayScreenshotDelay0
             // 
             this.tsmiTrayScreenshotDelay0.Name = "tsmiTrayScreenshotDelay0";
             resources.ApplyResources(this.tsmiTrayScreenshotDelay0, "tsmiTrayScreenshotDelay0");
             this.tsmiTrayScreenshotDelay0.Click += new System.EventHandler(this.tsmiScreenshotDelay0_Click);
+            this.tsmiTrayShowCursor.Visible = false;
             // 
             // tsmiTrayScreenshotDelay1
             // 
@@ -1364,6 +1373,7 @@
             this.tsmiTrayUpload.Image = global::ShareX.Properties.Resources.arrow_090;
             this.tsmiTrayUpload.Name = "tsmiTrayUpload";
             resources.ApplyResources(this.tsmiTrayUpload, "tsmiTrayUpload");
+            this.tsmiTrayUpload.Visible = false;
             // 
             // tsmiTrayUploadFile
             // 
@@ -1473,6 +1483,7 @@
             this.tsmiTrayScreenColorPicker.Name = "tsmiTrayScreenColorPicker";
             resources.ApplyResources(this.tsmiTrayScreenColorPicker, "tsmiTrayScreenColorPicker");
             this.tsmiTrayScreenColorPicker.Click += new System.EventHandler(this.tsmiScreenColorPicker_Click);
+            this.tsmiTrayScreenColorPicker.Visible = false;
             // 
             // tsmiTrayRuler
             // 
@@ -1487,6 +1498,7 @@
             this.tsmiTrayPinToScreen.Name = "tsmiTrayPinToScreen";
             resources.ApplyResources(this.tsmiTrayPinToScreen, "tsmiTrayPinToScreen");
             this.tsmiTrayPinToScreen.Click += new System.EventHandler(this.tsmiPinToScreen_Click);
+            this.tsmiTrayPinToScreen.Visible = false;
             // 
             // tssTrayTools1
             // 
@@ -1541,6 +1553,7 @@
             this.tsmiTrayImageThumbnailer.Name = "tsmiTrayImageThumbnailer";
             resources.ApplyResources(this.tsmiTrayImageThumbnailer, "tsmiTrayImageThumbnailer");
             this.tsmiTrayImageThumbnailer.Click += new System.EventHandler(this.tsmiImageThumbnailer_Click);
+            this.tsmiTrayImageThumbnailer.Visible = false;
             // 
             // tssTrayTools2
             // 
@@ -1579,6 +1592,7 @@
             this.tsmiTrayQRCode.Name = "tsmiTrayQRCode";
             resources.ApplyResources(this.tsmiTrayQRCode, "tsmiTrayQRCode");
             this.tsmiTrayQRCode.Click += new System.EventHandler(this.tsmiQRCode_Click);
+            this.tsmiTrayQRCode.Visible = false;
             // 
             // tsmiTrayHashChecker
             // 
@@ -1586,6 +1600,7 @@
             this.tsmiTrayHashChecker.Name = "tsmiTrayHashChecker";
             resources.ApplyResources(this.tsmiTrayHashChecker, "tsmiTrayHashChecker");
             this.tsmiTrayHashChecker.Click += new System.EventHandler(this.tsmiHashChecker_Click);
+            this.tsmiTrayHashChecker.Visible = false;
             // 
             // tsmiTrayMetadata
             // 
@@ -1593,6 +1608,7 @@
             this.tsmiTrayMetadata.Name = "tsmiTrayMetadata";
             resources.ApplyResources(this.tsmiTrayMetadata, "tsmiTrayMetadata");
             this.tsmiTrayMetadata.Click += new System.EventHandler(this.tsmiMetadata_Click);
+            this.tsmiTrayMetadata.Visible = false;
             // 
             // tsmiTrayIndexFolder
             // 
@@ -1612,6 +1628,7 @@
             this.tsmiTrayClipboardViewer.Name = "tsmiTrayClipboardViewer";
             resources.ApplyResources(this.tsmiTrayClipboardViewer, "tsmiTrayClipboardViewer");
             this.tsmiTrayClipboardViewer.Click += new System.EventHandler(this.tsmiClipboardViewer_Click);
+            this.tsmiTrayClipboardViewer.Visible = false;
             // 
             // tsmiTrayBorderlessWindow
             // 
@@ -1619,6 +1636,7 @@
             this.tsmiTrayBorderlessWindow.Name = "tsmiTrayBorderlessWindow";
             resources.ApplyResources(this.tsmiTrayBorderlessWindow, "tsmiTrayBorderlessWindow");
             this.tsmiTrayBorderlessWindow.Click += new System.EventHandler(this.tsmiBorderlessWindow_Click);
+            this.tsmiTrayBorderlessWindow.Visible = false;
             // 
             // tsmiTrayInspectWindow
             // 
@@ -1626,6 +1644,7 @@
             this.tsmiTrayInspectWindow.Name = "tsmiTrayInspectWindow";
             resources.ApplyResources(this.tsmiTrayInspectWindow, "tsmiTrayInspectWindow");
             this.tsmiTrayInspectWindow.Click += new System.EventHandler(this.tsmiInspectWindow_Click);
+            this.tsmiTrayInspectWindow.Visible = false;
             // 
             // tsmiTrayMonitorTest
             // 
@@ -1633,6 +1652,7 @@
             this.tsmiTrayMonitorTest.Name = "tsmiTrayMonitorTest";
             resources.ApplyResources(this.tsmiTrayMonitorTest, "tsmiTrayMonitorTest");
             this.tsmiTrayMonitorTest.Click += new System.EventHandler(this.tsmiMonitorTest_Click);
+            this.tsmiTrayMonitorTest.Visible = false;
             // 
             // tssTray1
             // 
@@ -1650,6 +1670,7 @@
             this.tsmiTrayAfterUploadTasks.Image = global::ShareX.Properties.Resources.upload_cloud;
             this.tsmiTrayAfterUploadTasks.Name = "tsmiTrayAfterUploadTasks";
             resources.ApplyResources(this.tsmiTrayAfterUploadTasks, "tsmiTrayAfterUploadTasks");
+            this.tsmiTrayAfterUploadTasks.Visible = false;
             // 
             // tsmiTrayDestinations
             // 
@@ -1666,30 +1687,35 @@
             this.tsmiTrayDestinations.Name = "tsmiTrayDestinations";
             resources.ApplyResources(this.tsmiTrayDestinations, "tsmiTrayDestinations");
             this.tsmiTrayDestinations.DropDownOpened += new System.EventHandler(this.tsddbDestinations_DropDownOpened);
+            this.tsmiTrayDestinations.Visible = false;
             // 
             // tsmiTrayImageUploaders
             // 
             this.tsmiTrayImageUploaders.Image = global::ShareX.Properties.Resources.image;
             this.tsmiTrayImageUploaders.Name = "tsmiTrayImageUploaders";
             resources.ApplyResources(this.tsmiTrayImageUploaders, "tsmiTrayImageUploaders");
+            this.tsmiTrayImageUploaders.Visible = false;
             // 
             // tsmiTrayTextUploaders
             // 
             this.tsmiTrayTextUploaders.Image = global::ShareX.Properties.Resources.notebook;
             this.tsmiTrayTextUploaders.Name = "tsmiTrayTextUploaders";
             resources.ApplyResources(this.tsmiTrayTextUploaders, "tsmiTrayTextUploaders");
+            this.tsmiTrayTextUploaders.Visible = false;
             // 
             // tsmiTrayFileUploaders
             // 
             this.tsmiTrayFileUploaders.Image = global::ShareX.Properties.Resources.application_block;
             this.tsmiTrayFileUploaders.Name = "tsmiTrayFileUploaders";
             resources.ApplyResources(this.tsmiTrayFileUploaders, "tsmiTrayFileUploaders");
+            this.tsmiTrayFileUploaders.Visible = false;
             // 
             // tsmiTrayURLShorteners
             // 
             this.tsmiTrayURLShorteners.Image = global::ShareX.Properties.Resources.edit_scale;
             this.tsmiTrayURLShorteners.Name = "tsmiTrayURLShorteners";
             resources.ApplyResources(this.tsmiTrayURLShorteners, "tsmiTrayURLShorteners");
+            this.tsmiTrayURLShorteners.Visible = false;
             // 
             // tsmiTrayURLSharingServices
             // 
@@ -1729,6 +1755,7 @@
             this.tsmiTrayTaskSettings.Name = "tsmiTrayTaskSettings";
             resources.ApplyResources(this.tsmiTrayTaskSettings, "tsmiTrayTaskSettings");
             this.tsmiTrayTaskSettings.Click += new System.EventHandler(this.tsbTaskSettings_Click);
+            this.tsmiTrayTaskSettings.Visible = false;
             // 
             // tsmiTrayHotkeySettings
             // 
@@ -1755,6 +1782,7 @@
             this.tsmiScreenshotsFolder.Name = "tsmiScreenshotsFolder";
             resources.ApplyResources(this.tsmiScreenshotsFolder, "tsmiScreenshotsFolder");
             this.tsmiScreenshotsFolder.Click += new System.EventHandler(this.tsbScreenshotsFolder_Click);
+            this.tsmiScreenshotsFolder.Visible = false;
             // 
             // tsmiTrayHistory
             // 
@@ -1762,6 +1790,7 @@
             this.tsmiTrayHistory.Name = "tsmiTrayHistory";
             resources.ApplyResources(this.tsmiTrayHistory, "tsmiTrayHistory");
             this.tsmiTrayHistory.Click += new System.EventHandler(this.tsbHistory_Click);
+            this.tsmiTrayHistory.Visible = false;
             // 
             // tsmiTrayImageHistory
             // 
@@ -1794,6 +1823,7 @@
             this.tsmiOpenActionsToolbar.Name = "tsmiOpenActionsToolbar";
             resources.ApplyResources(this.tsmiOpenActionsToolbar, "tsmiOpenActionsToolbar");
             this.tsmiOpenActionsToolbar.Click += new System.EventHandler(this.tsmiOpenActionsToolbar_Click);
+            this.tsmiOpenActionsToolbar.Visible = false;
             // 
             // tsmiTrayShow
             // 

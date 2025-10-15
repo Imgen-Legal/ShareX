@@ -230,6 +230,7 @@ namespace ShareX.UploadersLib
                 {
                     result.ResponseInfo = ProcessWebResponse(response);
                     result.Response = result.ResponseInfo?.ResponseText;
+                    result.StatusCode = response.StatusCode;
                 }
 
                 result.IsSuccess = true;
@@ -238,6 +239,11 @@ namespace ShareX.UploadersLib
             {
                 if (!StopUploadRequested)
                 {
+                    if (e is WebException webException && webException.Response is HttpWebResponse errorResponse)
+                    {
+                        result.StatusCode = errorResponse.StatusCode;
+                    }
+
                     string response = ProcessError(e, url);
 
                     if (ReturnResponseOnError && e is WebException)

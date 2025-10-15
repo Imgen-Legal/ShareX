@@ -24,6 +24,8 @@
 #endregion License Information (GPL v3)
 
 using ShareX.HelpersLib;
+using System;
+using System.Net;
 using System.Text;
 
 namespace ShareX.UploadersLib
@@ -32,6 +34,9 @@ namespace ShareX.UploadersLib
     {
         public string URL { get; set; }
         public string ThumbnailURL { get; set; }
+        public HttpStatusCode StatusCode { get; set; }
+        public Action ResetSessionAction { get; set; }
+
         public string DeletionURL { get; set; }
         public string ShortenedURL { get; set; }
 

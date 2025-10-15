@@ -345,6 +345,19 @@ namespace ShareX.ScreenCaptureLib
             }
         }
 
+        internal void ApplyAnnotationChanges()
+        {
+            using (Bitmap result = GetResultImage())
+            {
+                if (Canvas != null)
+                {
+                    Canvas.Dispose();
+                }
+                Canvas = result.CloneSafe();
+                ShapeManager.Shapes.Clear();
+            }
+        }
+
         internal void InitBackground(Bitmap canvas, bool centerCanvas = true)
         {
             Canvas?.Dispose();
@@ -1689,7 +1702,7 @@ namespace ShareX.ScreenCaptureLib
             if (PrintImageRequested != null)
             {
                 Bitmap bmp = ReceiveImageForTask();
-
+                
                 PrintImageRequested(bmp);
                 ShapeManager.IsImageModified = false;
             }

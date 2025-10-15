@@ -41,7 +41,7 @@ namespace ShareX
 {
     public partial class MainForm : HotkeyForm
     {
-        private const int MAX_BUTTON_TEXT_LENGTH = 22;
+        private const int MAX_BUTTON_TEXT_LENGTH = 14;
         public bool IsReady { get; private set; }
         public DirectusCase CurrentCase { get; set; }
         public List<DirectusPatient> CurrentPatients { get; set; }
@@ -83,16 +83,27 @@ namespace ShareX
             }
         }
 
+        public void ClearTasksList()
+        {
+            RemoveAllItems();
+            TaskManager.RecentManager.Clear();
+        }
+
         private void ToolStripCaseButton_Click(object sender, EventArgs e)
         {
-            using (var caseForm = new CaseSelectionForm())
+            CaseSelector();
+        }
+
+        private void CaseSelector()
+        {
+            using (var caseForm = new CaseSelectionForm(CurrentCase, CurrentPatients))
             {
                 if (caseForm.ShowDialog(this) == DialogResult.OK)
                 {
-                    this.CurrentCase = caseForm.SelectedCase;
-                    this.CurrentPatients = caseForm.SelectedPatients;
+                    CurrentCase = caseForm.SelectedCase;
+                    CurrentPatients = caseForm.SelectedPatients;
 
-                    this.UpdateCaseInfo();
+                    UpdateCaseInfo();
                 }
             }
         }
@@ -198,7 +209,7 @@ namespace ShareX
             AfterCaptureTasks[] ignoreAfterCaptureTasks = new AfterCaptureTasks[] { AfterCaptureTasks.None, AfterCaptureTasks.ShowQuickTaskMenu, AfterCaptureTasks.ShowAfterCaptureWindow, AfterCaptureTasks.PinToScreen,
             AfterCaptureTasks.SendImageToPrinter, AfterCaptureTasks.SaveThumbnailImageToFile, AfterCaptureTasks.CopyFilePathToClipboard, AfterCaptureTasks.CopyFilePathToClipboard,
             AfterCaptureTasks.ShowInExplorer , AfterCaptureTasks.ScanQRCode, AfterCaptureTasks.DoOCR, AfterCaptureTasks.ShowBeforeUploadWindow, AfterCaptureTasks.DeleteFile, AfterCaptureTasks.CopyFileToClipboard,
-            AfterCaptureTasks.PerformActions, AfterCaptureTasks.UploadImageToHost};
+            AfterCaptureTasks.PerformActions, AfterCaptureTasks.UploadImageToHost, AfterCaptureTasks.AnnotateImage};
 
             AddMultiEnumItems<AfterCaptureTasks>(x => Program.DefaultTaskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Swap(x),
                 new ToolStripDropDownItem[] { tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks }, ignoreAfterCaptureTasks);
@@ -831,7 +842,7 @@ namespace ShareX
                         }
                     }
 
-                    tsmiUploadSelectedFile.Visible = !SystemOptions.DisableUpload && uim.SelectedItem.IsFileExist;
+                    tsmiUploadSelectedFile.Visible = !SystemOptions.DisableUpload && uim.SelectedItem.IsFileExist && uim.SelectedItem.IsImageFile;
                     tsmiDownloadSelectedURL.Visible = uim.SelectedItem.IsFileURL;
                     tsmiEditSelectedFile.Visible = uim.SelectedItem.IsImageFile;
                     tsmiBeautifyImage.Visible = uim.SelectedItem.IsImageFile;
@@ -840,14 +851,14 @@ namespace ShareX
                     UpdateActionsMenu(uim.SelectedItem.Info.FilePath);
                     tsmiDeleteSelectedItem.Visible = true;
                     tsmiDeleteSelectedFile.Visible = uim.SelectedItem.IsFileExist;
-                    tsmiShortenSelectedURL.Visible = !SystemOptions.DisableUpload && uim.SelectedItem.IsURLExist;
-                    tsmiShareSelectedURL.Visible = !SystemOptions.DisableUpload && uim.SelectedItem.IsURLExist;
-                    tsmiGoogleLens.Visible = uim.SelectedItem.IsURLExist;
-                    tsmiBingVisualSearch.Visible = uim.SelectedItem.IsURLExist;
-                    tsmiShowQRCode.Visible = uim.SelectedItem.IsURLExist;
+                    tsmiShortenSelectedURL.Visible = false;
+                    tsmiShareSelectedURL.Visible = false;
+                    tsmiGoogleLens.Visible = false;
+                    tsmiBingVisualSearch.Visible = false;
+                    tsmiShowQRCode.Visible = false;
                     tsmiOCRImage.Visible = uim.SelectedItem.IsImageFile;
                     tsmiCombineImages.Visible = uim.SelectedItems.Count(x => x.IsImageFile) > 1;
-                    tsmiShowResponse.Visible = !string.IsNullOrEmpty(uim.SelectedItem.Info.Result.Response);
+                    tsmiShowResponse.Visible = false;
                 }
 
                 if (Program.Settings.TaskViewMode == TaskViewMode.ListView)
@@ -2448,19 +2459,39 @@ namespace ShareX
             uim.CombineImages(Orientation.Horizontal);
         }
 
+        public void LogoutAndResetUI()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(LogoutAndResetUI));
+            }
+            else
+            {
+                this.btnLogout_Click(null, EventArgs.Empty);
+            }
+        }
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
             SessionManager.AccessToken = null;
             SessionManager.RefreshToken = null;
+            Program.UploadersConfig.DirectusSessionPatientId = null;
+
+            CurrentCase = null;
+            CurrentPatients = null;
 
             TokenManager.DeleteTokens();
 
             this.Hide();
+            ClearTasksList();
 
             using (LoginForm loginForm = new LoginForm())
             {
                 if (loginForm.ShowDialog() == DialogResult.OK)
                 {
+                    CaseSelector();
+
+                    UpdateCaseInfo();
                     this.Show();
                 }
                 else

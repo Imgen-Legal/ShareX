@@ -60,6 +60,8 @@ namespace ShareX
         public void UpdateCloudStatus()
         {
             bool isUploaded = this.Task?.Info?.Result?.URL != null;
+            bool taskStopped = Task.Status == TaskStatus.Stopped;
+            string filePath = this.Task?.Info?.FilePath;
 
             if (isUploaded || Task.Status == TaskStatus.Working)
             {
@@ -68,6 +70,11 @@ namespace ShareX
 
                 this.ProgressVisible = false;
                 this.pbCloudStatus.BringToFront();
+            } else if (FileHelpers.IsVideoFile(filePath) || taskStopped)
+            {
+                this.btnUpload.Visible = false;
+                this.ProgressVisible = false;
+
             }
             else
             {

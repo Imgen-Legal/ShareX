@@ -55,6 +55,14 @@ namespace ShareX.ScreenCaptureLib
         private ToolStripLabel tslDragLeft, tslDragRight;
         private ToolStripLabeledComboBox tscbBorderStyle, tscbArrowHeadDirection, tscbImageInterpolationMode, tscbCursorTypes, tscbStepType, tscbCutOutEffectType;
 
+        internal void RunAfterCaptureTasks()
+         {
+            if (Form.Mode == RegionCaptureMode.TaskEditor)
+            {
+                Form.CloseWindow(RegionResult.AnnotateRunAfterCaptureTasks);
+            }
+         }
+
         internal void CreateToolbar()
         {
             menuForm = new Form()
@@ -124,7 +132,7 @@ namespace ShareX.ScreenCaptureLib
                 tsMain.Items.Add(tslDragLeft);
             }
 
-            if (Form.IsEditorMode)
+                if (Form.IsEditorMode)
             {
                 #region Editor mode
 
@@ -136,46 +144,46 @@ namespace ShareX.ScreenCaptureLib
                 }
                 else
                 {
-                    tsbCompleteEdit.Text = Resources.ShapeManager_CreateToolbar_ApplyChangesContinueTaskEnter;
+                   tsbCompleteEdit.Text = Resources.ShapeManager_CreateToolbar_ApplyChangesContinueTaskEnter;
                 }
 
                 tsbCompleteEdit.DisplayStyle = ToolStripItemDisplayStyle.Image;
                 tsbCompleteEdit.Image = Resources.tick;
+
                 tsbCompleteEdit.Click += (sender, e) =>
                 {
-                    Form.OnSaveImageRequested();
-                    Form.CloseWindow();
-                    Form.OnUploadImageRequested();
+                    if (Form.Mode == RegionCaptureMode.TaskEditor)
+                    {
+                        Form.ApplyAnnotationChanges();
+                        Form.CloseWindow(RegionResult.AnnotateContinueTask);
+                    }
+                    else
+                    {
+                        Form.OnSaveImageRequested();
+                        Form.CloseWindow();
+                        Form.OnUploadImageRequested();
+                    }
                 };
                 tsMain.Items.Add(tsbCompleteEdit);
-
-                if (Form.Mode == RegionCaptureMode.TaskEditor)
-                {
-                    ToolStripButton tsbContinueTask = new ToolStripButton(Resources.ShapeManager_CreateToolbar_ContinueTaskSpaceOrRightClick);
-                    tsbContinueTask.DisplayStyle = ToolStripItemDisplayStyle.Image;
-                    tsbContinueTask.Image = Resources.control;
-                    tsbContinueTask.Click += (sender, e) => Form.CloseWindow(RegionResult.AnnotateContinueTask);
-                    tsMain.Items.Add(tsbContinueTask);
-
-                    ToolStripButton tsbCancelTask = new ToolStripButton(Resources.ShapeManager_CreateToolbar_CancelTaskEsc);
-                    tsbCancelTask.DisplayStyle = ToolStripItemDisplayStyle.Image;
-                    tsbCancelTask.Image = Resources.cross;
-                    tsbCancelTask.Click += (sender, e) => Form.CloseWindow(RegionResult.AnnotateCancelTask);
-                    tsMain.Items.Add(tsbCancelTask);
-
-                    tsMain.Items.Add(new ToolStripSeparator());
-                }
 
                 tsbSaveImage = new ToolStripButton(Resources.ShapeManager_CreateToolbar_SaveImage);
                 tsbSaveImage.DisplayStyle = ToolStripItemDisplayStyle.Image;
                 tsbSaveImage.Image = Resources.disk_black;
-                tsbSaveImage.Click += (sender, e) => Form.OnSaveImageRequested();
+                tsbSaveImage.Click += (sender, e) =>
+                {
+                    Form.OnSaveImageRequested();
+                    RunAfterCaptureTasks();
+                };
                 tsMain.Items.Add(tsbSaveImage);
 
                 ToolStripButton tsbSaveImageAs = new ToolStripButton(Resources.ShapeManager_CreateToolbar_SaveImageAs);
                 tsbSaveImageAs.DisplayStyle = ToolStripItemDisplayStyle.Image;
                 tsbSaveImageAs.Image = Resources.disks_black;
-                tsbSaveImageAs.Click += (sender, e) => Form.OnSaveImageAsRequested();
+                tsbSaveImageAs.Click += (sender, e) =>
+                {
+                    Form.OnSaveImageAsRequested();
+                    RunAfterCaptureTasks();
+                };
                 tsMain.Items.Add(tsbSaveImageAs);
 
                 ToolStripButton tsbCopyImage = new ToolStripButton(Resources.ShapeManager_CreateToolbar_CopyImageToClipboard);

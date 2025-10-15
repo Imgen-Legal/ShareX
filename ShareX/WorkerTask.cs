@@ -25,7 +25,9 @@
 
 using ShareX.HelpersLib;
 using ShareX.Properties;
+using ShareX.ScreenCaptureLib;
 using ShareX.UploadersLib;
+using ShareX.UploadersLib.ImageUploaders;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -369,11 +371,11 @@ namespace ShareX
 
         private void DoUploadJob()
         {
+            Program.Settings.ShowUploadWarning = false;
+
             if (Program.Settings.ShowUploadWarning)
             {
                 bool disableUpload = !FirstTimeUploadForm.ShowForm();
-
-                Program.Settings.ShowUploadWarning = false;
 
                 if (disableUpload)
                 {
@@ -728,6 +730,17 @@ namespace ShareX
                     }
                 }
 
+                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.UploadImageToHost) && Data != null && Info.TaskSettings.UploadImageAfterTask)
+                {
+                    Status = TaskStatus.Working;
+                    Info.Status = "Uploading to host...";
+                    OnStatusChanged();
+                    DoOCR();
+                    DoUploadJob();
+
+                    Info.TaskSettings.UploadImageAfterTask = false;
+                }
+
                 if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveThumbnailImageToFile))
                 {
                     string thumbnailFileName, thumbnailFolder;
@@ -935,6 +948,11 @@ namespace ShareX
 
             uploader = service.CreateUploader(Program.UploadersConfig, taskReferenceHelper);
 
+            if (uploader is DirectusUploader directusUploader)
+            {
+                directusUploader.ResetSessionAction = () => Program.MainForm.LogoutAndResetUI();
+            }
+
             if (uploader != null)
             {
                 uploader.Errors.DefaultTitle = service.ServiceName + " " + "error";
@@ -993,6 +1011,8 @@ namespace ShareX
 
         public UploadResult UploadImage(Stream stream, string fileName)
         {
+            Info.TaskSettings.ImageDestination = ImageDestination.Directus;
+
             ImageUploaderService service = UploaderFactory.ImageUploaderServices[Info.TaskSettings.ImageDestination];
 
             return UploadData(service, stream, fileName);

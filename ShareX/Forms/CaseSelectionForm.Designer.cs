@@ -110,6 +110,7 @@ namespace ShareX.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(632, 162);
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnRedirect);
             this.Controls.Add(this.btnCancel);

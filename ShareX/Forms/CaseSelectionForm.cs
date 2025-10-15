@@ -15,8 +15,21 @@ namespace ShareX.Forms
 {
     public partial class CaseSelectionForm : Form
     {
+        public CaseSelectionForm(DirectusCase currentCase = null, List<DirectusPatient> currentPatients = null) : this()
+        {
+            var currentPatient = currentPatients?.FirstOrDefault();
+            _previousPatient = currentPatient;
+            _lastConfirmedPatientId = currentPatient?.Id;
+            SelectedCase = currentCase;
+            SelectedPatients = currentPatients ?? new List<DirectusPatient>();
+        }
+
         public DirectusCase SelectedCase { get; private set; }
         public List<DirectusPatient> SelectedPatients { get; private set; }
+
+        private string _lastConfirmedPatientId = null;
+
+        private DirectusPatient _previousPatient = null;
 
         private static readonly string RedirectUrl = ConfigurationManager.AppSettings["RedirectUrl"];
         private static readonly string PresentationBuilderUrl = ConfigurationManager.AppSettings["PlatformBaseUrl"] + "/presentation-builder";
@@ -35,7 +48,7 @@ namespace ShareX.Forms
             searchComboBox.AutoCompleteMode = AutoCompleteMode.None;
             searchComboBox.AutoCompleteSource = AutoCompleteSource.None;
             searchComboBox.DropDownHeight = 400;
-            searchComboBox.Font = new Font(searchComboBox.Font.FontFamily, 12F, FontStyle.Regular); // Increased font size inside dropdown/textbox
+            searchComboBox.Font = new Font(searchComboBox.Font.FontFamily, 12F, FontStyle.Regular);
             searchComboBox.BackColor = Color.FromArgb(60, 60, 60);
             searchComboBox.ForeColor = Color.White;
             searchComboBox.FlatStyle = FlatStyle.Flat;
@@ -48,8 +61,6 @@ namespace ShareX.Forms
             btnRedirect.Click += BtnRedirect_Click;
 
             NativeMethods.UseImmersiveDarkMode(this.Handle, ShareXResources.IsDarkTheme);
-
-            FilterItems(true);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -89,13 +100,48 @@ namespace ShareX.Forms
                 return;
             }
 
+            var currentPatientId = SelectedPatients.First().Id;
+            var selectedCaseId = SelectedCase.Id;
+
+            if (!string.IsNullOrEmpty(_lastConfirmedPatientId) && currentPatientId != _lastConfirmedPatientId && Program.MainForm != null)
+            {
+                var result = MessageBox.Show(
+                    "All unsaved screenshots of the previous case will be removed. \nDo you want to continue?",
+                    "Confirm patient change",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+
+                CleanUpTasks();
+            }
+
+            if (SelectedCase != null && SelectedPatients.Any())
+            {
+                _lastConfirmedPatientId = currentPatientId;
+                _previousPatient = SelectedPatients.First();
+                try
+                {
+                    if (Program.UploadersConfig != null)
+                    {
+                        Program.UploadersConfig.DirectusSessionPatientId = currentPatientId;
+                        Program.UploadersConfig.DirectusSessionCaseId = selectedCaseId;
+                    }
+                }
+                catch { /* ignore */ }
+            }
+
             try
             {
                 var caseId = SelectedCase.Id;
-                var patientId = SelectedPatients.First().Id;
+                var patientId = currentPatientId;
 
                 string fullUrl = $"{PresentationBuilderUrl}/{caseId}?selectedPatient=\"{patientId}\"";
                 Program.UploadersConfig.DirectusSessionPatientId = patientId;
+                Program.UploadersConfig.DirectusSessionCaseId = selectedCaseId;
 
                 Process.Start(new ProcessStartInfo(fullUrl) { UseShellExecute = true });
             }
@@ -103,7 +149,6 @@ namespace ShareX.Forms
             {
                 MessageBox.Show($"Successfully selected case, but could not open Presentation Builder link: {ex.Message}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -131,9 +176,13 @@ namespace ShareX.Forms
                 this.Text = "Loading data...";
                 using (var client = new HttpClient())
                 {
-
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SessionManager.AccessToken);
-                    var url = $"{DirectusBaseUrl}/items/patient?fields=*,case_id.*&{filterQuery}&limit={dropdownLimit}";
+
+                    var statusFilter = "&filter[case_id][status][_in]=Created,In%20progress,Done";
+
+                    var sortQuery = "&sort=case_id.name,last_name";
+
+                    var url = $"{DirectusBaseUrl}/items/patient?fields=*,case_id.*&{filterQuery}{statusFilter}{sortQuery}&limit={dropdownLimit}";
 
                     var response = await client.GetAsync(url);
                     response.EnsureSuccessStatusCode();
@@ -152,6 +201,7 @@ namespace ShareX.Forms
                             Status = p.Case?.Status,
                             PatientName = p.FirstName,
                             PatientLastName = p.LastName,
+                            PatientMiddleName = p.MiddleName,
                             OriginalCase = p.Case,
                             OriginalPatient = p
                         }).ToList();
@@ -171,7 +221,7 @@ namespace ShareX.Forms
 
         private string FormatDisplayModel(CaseDisplayModel model)
         {
-            string patientFullName = $"{model.PatientName} {model.PatientLastName}";
+            string patientFullName = $"{model.PatientLastName} {model.PatientName} {model.PatientMiddleName}";
             if (!string.IsNullOrEmpty(model.CaseName))
             {
                 return $"{model.CaseName} - {patientFullName}";
@@ -184,6 +234,12 @@ namespace ShareX.Forms
 
         private async void FilterItems(bool initialLoad)
         {
+            if (initialLoad)
+            {
+                searchComboBox.Focus();
+                return;
+            }
+
             string currentSearchText = searchComboBox.Text;
             try
             {
@@ -193,42 +249,37 @@ namespace ShareX.Forms
                 SelectedCase = null;
                 SelectedPatients = null;
 
-                var filterQueries = new List<string>();
-                filterQueries.Add("filter[case_id][_nnull]=true");
+                var filterQueries = new List<string> { "filter[case_id][_nnull]=true" };
 
                 if (!string.IsNullOrEmpty(searchText))
                 {
-                    var searchTerms = searchText.ToLowerInvariant();
-                    var encodedSearchTerms = Uri.EscapeDataString(searchTerms);
-                    var orConditions = new List<string>();
-                    int index = 0;
+                    var words = searchText
+                        .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(w => Uri.EscapeDataString(w.ToLowerInvariant()))
+                        .ToArray();
 
-                    var words = searchText.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    string firstWord = words.Length > 0 ? Uri.EscapeDataString(words[0].ToLowerInvariant()) : "";
-                    string secondWord = words.Length > 1 ? Uri.EscapeDataString(words[1].ToLowerInvariant()) : "";
+                    var andConditions = new List<string>();
 
-                    orConditions.Add($"filter[_or][{index++}][case_id][name][_icontains]={encodedSearchTerms}");
-
-                    if (words.Length > 1)
+                    for (int i = 0; i < words.Length; i++)
                     {
-                        orConditions.Add($"filter[_or][{index++}][_and][0][first_name][_icontains]={firstWord}");
-                        orConditions.Add($"filter[_or][{index - 1}][_and][1][last_name][_icontains]={secondWord}");
+                        string word = words[i];
+                        string orCondition = string.Join("&", new[]
+                        {
+                            $"filter[_and][{i}][_or][0][first_name][_icontains]={word}",
+                            $"filter[_and][{i}][_or][1][middle_name][_icontains]={word}",
+                            $"filter[_and][{i}][_or][2][last_name][_icontains]={word}",
+                            $"filter[_and][{i}][_or][3][case_id][name][_icontains]={word}"
+                        });
 
-                        orConditions.Add($"filter[_or][{index++}][_and][0][first_name][_icontains]={secondWord}");
-                        orConditions.Add($"filter[_or][{index - 1}][_and][1][last_name][_icontains]={firstWord}");
+                        andConditions.Add(orCondition);
                     }
 
-                    orConditions.Add($"filter[_or][{index++}][first_name][_icontains]={encodedSearchTerms}");
-                    orConditions.Add($"filter[_or][{index++}][last_name][_icontains]={encodedSearchTerms}");
-
-                    filterQueries.Add(string.Join("&", orConditions));
+                    filterQueries.Add(string.Join("&", andConditions));
                 }
 
-                var combinedFilterQuery = string.Join("&", filterQueries.Select(q => q.Replace("[", "%5B").Replace("]", "%5D")));
+                string combinedFilterQuery = string.Join("&", filterQueries.Select(q => q.Replace("[", "%5B").Replace("]", "%5D")));
 
                 var displayModels = await LoadItemsAsync(combinedFilterQuery);
-
-                searchComboBox.DataSource = null;
 
                 var dataSourceList = displayModels.Select(m => new
                 {
@@ -236,21 +287,40 @@ namespace ShareX.Forms
                     OriginalData = m
                 }).ToList();
 
+                searchComboBox.DataSource = null;
                 searchComboBox.DisplayMember = "FormattedName";
                 searchComboBox.ValueMember = "OriginalData";
-
                 searchComboBox.DataSource = dataSourceList;
 
                 searchComboBox.SelectedIndex = -1;
                 SelectedCase = null;
                 SelectedPatients = new List<DirectusPatient>();
-
                 searchComboBox.Text = currentSearchText;
 
-                if (displayModels.Count > 0 && !initialLoad)
+                try
                 {
-                    searchComboBox.DroppedDown = true;
+                    if (Program.UploadersConfig != null &&
+                        !string.IsNullOrEmpty(Program.UploadersConfig.DirectusSessionPatientId))
+                    {
+                        var sessPatientId = Program.UploadersConfig.DirectusSessionPatientId;
+                        var match = dataSourceList
+                            .Select(x => x.OriginalData as CaseDisplayModel)
+                            .FirstOrDefault(m => m?.OriginalPatient?.Id == sessPatientId);
+
+                        if (match != null)
+                        {
+                            _lastConfirmedPatientId = match.OriginalPatient?.Id;
+                            _previousPatient = match.OriginalPatient;
+                        }
+                    }
                 }
+                catch
+                {
+                    // ignore
+                }
+
+                if (displayModels.Count > 0 && !initialLoad)
+                    searchComboBox.DroppedDown = true;
             }
             catch (Exception ex)
             {
@@ -260,6 +330,12 @@ namespace ShareX.Forms
             {
                 searchComboBox.Focus();
             }
+        }
+
+
+        private void CleanUpTasks()
+        {
+            Program.MainForm.ClearTasksList();
         }
     }
 }
