@@ -8,7 +8,7 @@ public static class TokenManager
 {
     private static readonly string TokenFilePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-        "ShareX",
+        "ImgenShareX",
         "AuthTokens.json"
     );
 

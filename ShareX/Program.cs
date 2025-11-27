@@ -45,7 +45,7 @@ namespace ShareX
 {
     internal static class Program
     {
-        public const string AppName = "ShareX";
+        public const string AppName = "ImgenShareX";
         public const string MutexName = "82E6AC09-0FEF-4390-AD9F-0DD3F5561EFC";
         public static readonly string PipeName = $"{Environment.MachineName}-{Environment.UserName}-{AppName}";
 

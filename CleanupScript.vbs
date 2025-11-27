@@ -5,7 +5,7 @@ Dim WshShell
 Set WshShell = CreateObject("WScript.Shell")
 
 Dim baseFolder
-baseFolder = WshShell.ExpandEnvironmentStrings("%USERPROFILE%") & "\Documents\ShareX\"
+baseFolder = WshShell.ExpandEnvironmentStrings("%USERPROFILE%") & "\Documents\ImgenShareX\"
 
 Dim filesToDelete(4)
 filesToDelete(0) = "ApplicationConfig.json"
