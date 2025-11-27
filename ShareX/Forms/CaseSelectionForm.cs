@@ -337,5 +337,10 @@ namespace ShareX.Forms
         {
             Program.MainForm.ClearTasksList();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -117,4 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Please search for an existing Case before taking screenshots. If this is a new Case, click “Add Case” — you’ll be redirected to the platform to create it. After creation, return here and select your new Case to continue.</value>
+  </data>
 </root>
