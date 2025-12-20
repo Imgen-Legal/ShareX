@@ -735,7 +735,6 @@ namespace ShareX
                     Status = TaskStatus.Working;
                     Info.Status = "Uploading to host...";
                     OnStatusChanged();
-                    DoOCR();
                     DoUploadJob();
 
                     Info.TaskSettings.UploadImageAfterTask = false;

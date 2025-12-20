@@ -553,6 +553,7 @@
             this.tsmiOCR.Name = "tsmiOCR";
             resources.ApplyResources(this.tsmiOCR, "tsmiOCR");
             this.tsmiOCR.Click += new System.EventHandler(this.tsmiOCR_Click);
+            this.tsmiOCR.Visible = false;
             // 
             // tsmiMetadata
             // 
@@ -1008,7 +1009,7 @@
             this.tsmiUploadSelectedFile.Image = global::ShareX.Properties.Resources.drive_upload;
             this.tsmiUploadSelectedFile.Name = "tsmiUploadSelectedFile";
             resources.ApplyResources(this.tsmiUploadSelectedFile, "tsmiUploadSelectedFile");
-            this.tsmiUploadSelectedFile.Click += new System.EventHandler(this.tsmiUploadSelectedFileAndOCR_Click);
+            this.tsmiUploadSelectedFile.Click += new System.EventHandler(this.tsmiUploadSelectedFile_Click);
             // 
             // tsmiDownloadSelectedURL
             // 
@@ -1585,6 +1586,7 @@
             this.tsmiTrayOCR.Name = "tsmiTrayOCR";
             resources.ApplyResources(this.tsmiTrayOCR, "tsmiTrayOCR");
             this.tsmiTrayOCR.Click += new System.EventHandler(this.tsmiTrayOCR_Click);
+            this.tsmiTrayOCR.Visible = false;
             // 
             // tsmiTrayQRCode
             // 
