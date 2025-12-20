@@ -42,6 +42,11 @@ namespace ShareX.Forms
             this.Text = "Select Case/Patient";
             this.Icon = ShareXResources.Icon;
 
+            searchComboBox.DropDownHeight = 1;
+            searchComboBox.MaxDropDownItems = 1;
+
+            searchComboBox.DropDown += SearchComboBox_DropDown;
+
             this.Font = new Font(this.Font.FontFamily, 10F);
 
             searchComboBox.DropDownStyle = ComboBoxStyle.DropDown;
@@ -61,6 +66,9 @@ namespace ShareX.Forms
             btnRedirect.Click += BtnRedirect_Click;
 
             NativeMethods.UseImmersiveDarkMode(this.Handle, ShareXResources.IsDarkTheme);
+            searchComboBox.TextChanged += SearchComboBox_TextChanged;
+
+            btnSearch.Enabled = false;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -70,6 +78,13 @@ namespace ShareX.Forms
 
         private void SearchComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (searchComboBox.SelectedItem is string)
+            {
+                SelectedCase = null;
+                SelectedPatients = new List<DirectusPatient>();
+                return;
+            }
+
             object selectedItem = searchComboBox.SelectedItem;
 
             if (selectedItem != null)
@@ -90,6 +105,23 @@ namespace ShareX.Forms
 
             SelectedCase = null;
             SelectedPatients = new List<DirectusPatient>();
+        }
+
+        private void SearchComboBox_DropDown(object sender, EventArgs e)
+        {
+            bool hasText = !string.IsNullOrWhiteSpace(searchComboBox.Text);
+            bool hasItems = searchComboBox.Items.Count > 0;
+
+            if (!hasText || !hasItems)
+            {
+                searchComboBox.DropDownHeight = 30;
+                searchComboBox.MaxDropDownItems = 1;
+            }
+            else
+            {
+                searchComboBox.DropDownHeight = 400;
+                searchComboBox.MaxDropDownItems = 50;
+            }
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -166,6 +198,11 @@ namespace ShareX.Forms
             }
         }
 
+        private void SearchComboBox_TextChanged(object sender, EventArgs e)
+        {
+            btnSearch.Enabled = !string.IsNullOrWhiteSpace(searchComboBox.Text);
+        }
+
         private static readonly string DirectusBaseUrl = ConfigurationManager.AppSettings["DirectusBaseUrl"];
 
 
@@ -232,6 +269,16 @@ namespace ShareX.Forms
             }
         }
 
+        private void ClearSearchResults()
+        {
+            searchComboBox.DroppedDown = false;
+            searchComboBox.DataSource = null;
+            searchComboBox.Items.Clear();
+
+            SelectedCase = null;
+            SelectedPatients = new List<DirectusPatient>();
+        }
+
         private async void FilterItems(bool initialLoad)
         {
             if (initialLoad)
@@ -244,6 +291,17 @@ namespace ShareX.Forms
             try
             {
                 var searchText = currentSearchText?.Trim() ?? "";
+
+                if (string.IsNullOrEmpty(searchText))
+                {
+                    searchComboBox.DroppedDown = false;
+                    searchComboBox.DataSource = null;
+
+                    SelectedCase = null;
+                    SelectedPatients = new List<DirectusPatient>();
+
+                    return;
+                }
 
                 searchComboBox.SelectedIndex = -1;
                 SelectedCase = null;
@@ -286,6 +344,21 @@ namespace ShareX.Forms
                     FormattedName = FormatDisplayModel(m),
                     OriginalData = m
                 }).ToList();
+
+                if (displayModels.Count == 0)
+                {
+                    searchComboBox.DataSource = null;
+                    searchComboBox.Items.Clear();
+
+                    searchComboBox.Items.Add("No results found");
+                    searchComboBox.SelectedIndex = 0;
+                    searchComboBox.DroppedDown = true;
+
+                    SelectedCase = null;
+                    SelectedPatients = new List<DirectusPatient>();
+
+                    return;
+                }
 
                 searchComboBox.DataSource = null;
                 searchComboBox.DisplayMember = "FormattedName";

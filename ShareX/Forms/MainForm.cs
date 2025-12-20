@@ -138,17 +138,16 @@ namespace ShareX
 
         public async Task OnCustomUploadRequested()
         {
-            await this.PerformUploadAndOCRLogicAsync(this, EventArgs.Empty);
+            await this.PerformUploadAsync(this, EventArgs.Empty);
         }
 
         private async void UcTaskThumbnailView_UploadFileRequest(object sender, EventArgs e)
         {
-            await this.PerformUploadAndOCRLogicAsync(sender, EventArgs.Empty);
+            await this.PerformUploadAsync(sender, EventArgs.Empty);
         }
 
-        private async Task PerformUploadAndOCRLogicAsync(object sender, EventArgs e)
+        private async Task PerformUploadAsync(object sender, EventArgs e)
         {
-            await this.OCRImageAsync(sender, e);
             uim.Upload();
         }
 
@@ -856,7 +855,7 @@ namespace ShareX
                     tsmiGoogleLens.Visible = false;
                     tsmiBingVisualSearch.Visible = false;
                     tsmiShowQRCode.Visible = false;
-                    tsmiOCRImage.Visible = uim.SelectedItem.IsImageFile;
+                    tsmiOCRImage.Visible = false;
                     tsmiCombineImages.Visible = uim.SelectedItems.Count(x => x.IsImageFile) > 1;
                     tsmiShowResponse.Visible = false;
                 }
@@ -2383,9 +2382,8 @@ namespace ShareX
             uim.CopyCustomFormat(cf.Format);
         }
 
-        private async void tsmiUploadSelectedFileAndOCR_Click(object sender, EventArgs e)
+        private async void tsmiUploadSelectedFile_Click(object sender, EventArgs e)
         {
-            await this.OCRImageAsync(this, EventArgs.Empty);
             uim.Upload();
         }
 
